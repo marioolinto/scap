@@ -1,5 +1,6 @@
 package br.com.vitrinidatasoft.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -14,7 +15,7 @@ import javax.persistence.OneToMany;
  * @author mrhell
  */
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
   
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -83,10 +84,6 @@ public class Cliente {
 
     public void addTelefone(Telefone telefone) {
         telefone.setCliente(this);
-        this.telefones.add(telefone);
-               
-    }
-    
-    
-        
+        this.telefones.add(telefone);               
+    }        
 }
