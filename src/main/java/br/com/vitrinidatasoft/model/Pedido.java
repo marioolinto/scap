@@ -23,23 +23,34 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String numero;
     
     @ManyToOne
     private Cliente cliente;
-    //private Usuario usuario;    
+    
+    private String numero;    
     
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar data;
+    private Calendar dataPedido;
     
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar dataEntrega;
+    
+    private String endereco;
+    private String observacao;    
     private Float valor;
+    private Float desconto;
     
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, 
             orphanRemoval = true)
-    private final Set<ItemPedido> itens;
+    private final Set<PedidoItem> itens;
 
     public Pedido() {
         this.itens = new HashSet<>();
+    }
+
+    public void addItem(PedidoItem itemPedido) {
+        itemPedido.setPedido(this);
+        itens.add(itemPedido);
     }
 
     public Long getId() {
@@ -50,14 +61,6 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -66,12 +69,28 @@ public class Pedido implements Serializable {
         this.cliente = cliente;
     }
 
-    public Calendar getData() {
-        return data;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setData(Calendar data) {
-        this.data = data;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Calendar getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Calendar dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public Calendar getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(Calendar dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
     public Float getValor() {
@@ -80,12 +99,29 @@ public class Pedido implements Serializable {
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }    
+
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void addItem(ItemPedido itemPedido) {
-        itemPedido.setPedido(this);
-        itens.add(itemPedido);
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
     
-    
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public Float getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Float desconto) {
+        this.desconto = desconto;
+    }
 }

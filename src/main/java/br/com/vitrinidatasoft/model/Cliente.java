@@ -2,6 +2,7 @@ package br.com.vitrinidatasoft.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +25,8 @@ public class Cliente implements Serializable {
     private String nome;
     private String rg;
     private String cpf;
-    private String email; 
+    private String email;
+    private String endereco;
     
     @OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL, 
                orphanRemoval = true)
@@ -85,5 +87,35 @@ public class Cliente implements Serializable {
     public void addTelefone(Telefone telefone) {
         telefone.setCliente(this);
         this.telefones.add(telefone);               
-    }        
+    }
+    
+     public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        return Objects.equals(this.cpf, other.cpf);           
+    }       
 }

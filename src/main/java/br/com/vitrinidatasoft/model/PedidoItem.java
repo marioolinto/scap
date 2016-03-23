@@ -12,20 +12,20 @@ import javax.persistence.ManyToOne;
  * @author mrhell
  */
 @Entity
-public class ItemPedido implements Serializable  {
+public class PedidoItem implements Serializable  {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    
+    @ManyToOne
+    private Pedido pedido;
  
     @ManyToOne
     private Produto produto;
     
     private Integer quantidade;        
-    private Float valorUnitario;
-    
-    @ManyToOne
-    private Pedido pedido;
-    
+    private Float valor;
+        
     public Long getId() {
         return id;
     }
@@ -33,7 +33,15 @@ public class ItemPedido implements Serializable  {
     public void setId(Long id) {
         this.id = id;
     }
+    
+     public Pedido getPedido() {
+        return pedido;
+    }
 
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+    
     public Produto getProduto() {
         return produto;
     }
@@ -50,19 +58,11 @@ public class ItemPedido implements Serializable  {
         this.quantidade = quantidade;
     }
     
-    public Float getValorUnitario() {
-        return valorUnitario;
+    public Float getValor() {
+        return valor;
     }
 
-    public void setValorUnitario(Float valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
+    public void setValor(Float valor) {
+        this.valor = valor;
+    }   
 }
