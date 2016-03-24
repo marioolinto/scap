@@ -39,7 +39,7 @@ public class Telefone implements Serializable {
 
     public Cliente getCliente() {
         return cliente;
-    }
+}
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
