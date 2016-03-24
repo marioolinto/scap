@@ -36,6 +36,7 @@ public class ClienteDao {
             transaction.rollback();            
         }finally{
             manager.close();
-        }        
+        }                
+        factory.close();
     }    
 }

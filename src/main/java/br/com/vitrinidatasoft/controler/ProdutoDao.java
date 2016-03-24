@@ -34,6 +34,7 @@ public class ProdutoDao {
             transaction.rollback();            
         }finally{
             manager.close();
-        }        
+        }
+        factory.close();
     }    
 }
