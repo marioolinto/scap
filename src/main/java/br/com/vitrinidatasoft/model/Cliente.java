@@ -27,9 +27,9 @@ public class Cliente implements Serializable {
     private String email;
     private String endereco;
     
-    @OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL, 
-               orphanRemoval = true)
-    private Set<Telefone> telefones;
+    @OneToMany(mappedBy="cliente", cascade=CascadeType.ALL, 
+               orphanRemoval=true)
+    private Set<Telefone> telefones;        
     
     public Cliente(){
         this.telefones = new HashSet<>();
