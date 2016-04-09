@@ -27,8 +27,9 @@ public class ProdutoService {
     }
     
     public List<Produto> findAll(){
-        
+        produtoDao.openCurrentManager();
         List<Produto> list = produtoDao.findAll();
+        produtoDao.closeCurrentManager();
         
         return list;
     }

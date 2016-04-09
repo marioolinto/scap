@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 /**
  *
  * @author mrhell
@@ -57,9 +56,7 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
         try{
             currentManager.persist(cliente);
         }catch(Exception e){
-           JOptionPane optionPane = new JOptionPane(
-                    e.getMessage(), JOptionPane.ERROR_MESSAGE);
-            optionPane.setVisible(true);
+            System.out.println(e.getMessage());
         }       
     }
 

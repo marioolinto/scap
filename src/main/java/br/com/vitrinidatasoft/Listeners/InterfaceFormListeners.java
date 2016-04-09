@@ -16,7 +16,6 @@ public interface InterfaceFormListeners extends ActionListener{
     public void resetFields();
     public void turnButtonsOn();
     public void turnButtonsOf();
-    public void cancelAction();
     public void disableEditTexts();
     public void enableEditTexts();   
     public void actionPerformedNovo();

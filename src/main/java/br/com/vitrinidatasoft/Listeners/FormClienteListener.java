@@ -10,6 +10,7 @@ import br.com.vitrinidatasoft.model.Telefone;
 import br.com.vitrinidatasoft.service.ClienteService;
 import br.com.vitrinidatasoft.view.FormCliente;
 import br.com.vitrinidatasoft.utils.Constantes;
+import br.com.vitrinidatasoft.view.DialogListaCliente;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
@@ -25,6 +26,7 @@ public class FormClienteListener implements InterfaceFormListeners{
     private final FormCliente form;
     private DefaultListModel model;  
     private Cliente cliente;
+    private Telefone telefone;
             
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public FormClienteListener(FormCliente formCliente){
@@ -56,6 +58,22 @@ public class FormClienteListener implements InterfaceFormListeners{
         
         form.getTabbedPane().setSelectedIndex(0);
         Component[] components = form.getPanelData().getComponents();
+        for (Component component : components){
+            if (component instanceof JTextField){
+                JTextField text = (JTextField)component;
+                text.setText("");
+            }
+        }
+        
+        components = form.getPanelEndereco().getComponents();
+        for (Component component : components){
+            if (component instanceof JTextField){
+                JTextField text = (JTextField)component;
+                text.setText("");
+            }
+        }
+        
+        components = form.getPanelContato().getComponents();
         for (Component component : components){
             if (component instanceof JTextField){
                 JTextField text = (JTextField)component;
@@ -102,8 +120,7 @@ public class FormClienteListener implements InterfaceFormListeners{
                 actionPerformedNovo();
                 break;   
             case (Constantes.EDITAR):
-                turnButtonsOn();
-                System.out.println("Abrir lista de clientes do banco");
+                actionPerfomedEditar();
                 break;
             case (Constantes.SALVAR):
                 actionPerformedSalvar();
@@ -113,15 +130,7 @@ public class FormClienteListener implements InterfaceFormListeners{
                 break;
         }
     }
-
-    /**
-     *
-     */
-    @Override
-    public void cancelAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void disableEditTexts() {       
         Component[] components = form.getPanelData().getComponents();
@@ -209,7 +218,7 @@ public class FormClienteListener implements InterfaceFormListeners{
         String rg = form.getTxtRG().getText();
         String cpg = form.getTxtCPF().getText();
         String endereco = form.getCmbTipoDeVia().getSelectedItem().toString() +
-               form.getTxtNomeVia().getText() + ",Número: " + 
+               form.getTxtNomeVia().getText() + ", Número: " + 
                form.getTxtNumero().getText() + ", Bairro: " + 
                form.getTxtBairro().getText() + ", Complemento: " +
                form.getTxtComplemento() + ", CEP: " +
@@ -222,38 +231,63 @@ public class FormClienteListener implements InterfaceFormListeners{
            cliente.setRg(rg);
            cliente.setCpf(cpg);
            cliente.setEndereco(endereco);
+           cliente.setEmail(email);
            
            ClienteService clietService = new ClienteService();
            clietService.persist(cliente);
            
            turnButtonsOf();
            resetFields();           
-           disableEditTexts();           
+           disableEditTexts();
+           cliente = null;
+           
         }
     }
 
     @Override
     public void actionPerfomedEditar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DialogListaCliente dialogListaCliente = new 
+            DialogListaCliente(form, true);
+        dialogListaCliente.setLocationRelativeTo(form);
+        dialogListaCliente.setVisible(true);
+        cliente = dialogListaCliente.getCliente();
+        
+        fillData();
+            
     }
 
     @Override
     public void actionPerformedCancelar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        resetFields();
+        disableEditTexts();
+        turnButtonsOf();
+        telefone = null;
+        cliente = null;        
     }
 
     private void addTelefone() {
-        model = (DefaultListModel) 
-        form.getListaTelefones().getModel();
         String numero = form.getTxtNumeroTelefone().getText();        
-        model.addElement(numero);        
-        
-        Telefone telefone = new Telefone();
-        telefone.setTelefone(numero);        
-        cliente.addTelefone(telefone);
-        
-        form.getTxtNumeroTelefone().setText("");
-        form.getTxtNumeroTelefone().requestFocus();
+        if (!numero.equals("")){ 
+            model = (DefaultListModel) 
+            form.getListaTelefones().getModel();
+
+            model.addElement(numero);        
+
+            telefone = new Telefone();
+            telefone.setTelefone(numero);        
+            cliente.addTelefone(telefone);
+
+            form.getTxtNumeroTelefone().setText("");
+            form.getTxtNumeroTelefone().requestFocus();
+        }
     }
-      
+
+    private void fillData() {
+        if (cliente != null){
+            
+            form.getTxtNome().setText(cliente.getNome());
+            form.getTxtRG().setText(cliente.getRg());
+            form.getTxtCPF().setText(cliente.getCpf());
+        }
+    }
 }

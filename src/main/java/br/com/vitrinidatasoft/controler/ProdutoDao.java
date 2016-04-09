@@ -24,8 +24,15 @@ public class ProdutoDao implements InterfaceDao<Produto, Long>{
     public void closeTransaction(){
         currentTransaction.commit();
         getCurrentManager().close();
-        //getCurrentFactory().close();
     }
+    
+    public void openCurrentManager(){
+        setCurrentManager(DataBaseFactory.getInstance().createEntityManager());
+    }
+    
+     public void closeCurrentManager(){
+        getCurrentManager().close();
+    } 
     
     public EntityManager getCurrentManager() {
         return currentManager;
@@ -40,9 +47,7 @@ public class ProdutoDao implements InterfaceDao<Produto, Long>{
         try{
            currentManager.persist(produto);
         }catch(Exception e){
-            JOptionPane optionPane = new JOptionPane(
-                    e.getMessage(), JOptionPane.ERROR_MESSAGE);
-            optionPane.setVisible(true);
+            System.out.println(e);
         }
     }
 
@@ -61,11 +66,9 @@ public class ProdutoDao implements InterfaceDao<Produto, Long>{
     @Override
     public List<Produto> findAll() {
         String queryString = "From Produto";
-        EntityManager entityManager = 
-                DataBaseFactory.getInstance().createEntityManager();
-        Query query = entityManager.createQuery(queryString);
-        List<Produto> produtos = query.getResultList();
-        entityManager.close();
+        
+        Query query = currentManager.createQuery(queryString);
+        List<Produto> produtos = query.getResultList();        
         return produtos;
     }
 

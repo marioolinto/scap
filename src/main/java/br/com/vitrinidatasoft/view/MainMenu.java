@@ -183,9 +183,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(lblBtnProduto)
-                        .addGap(88, 88, 88)
+                        .addGap(76, 76, 76)
                         .addComponent(lblBtnPedido)
-                        .addGap(97, 97, 97)
+                        .addGap(109, 109, 109)
                         .addComponent(lblBtnSair)))
                 .addGap(123, 123, 123))
         );

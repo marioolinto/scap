@@ -8,9 +8,14 @@ package br.com.vitrinidatasoft.Listeners;
 import br.com.vitrinidatasoft.model.Produto;
 import br.com.vitrinidatasoft.service.ProdutoService;
 import br.com.vitrinidatasoft.utils.Constantes;
+import br.com.vitrinidatasoft.view.FormListaProduto;
 import br.com.vitrinidatasoft.view.FormProduto;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -52,16 +57,16 @@ public class FormProdutoListener implements InterfaceFormListeners {
                 actionPerformedNovo();
                 break;
             case (Constantes.EDITAR):
-                System.out.println("Clicou no editar");
+                actionPerfomedEditar();
                 break;
             case (Constantes.SALVAR):
                 actionPerformedSalvar();
                 break;
             case (Constantes.CANCELAR):
-                System.out.println("Clicou no cancelar");
+                actionPerformedCancelar();
                 break;
             case (Constantes.CARREGAR_IMAGEM):
-                System.out.println("Clicou " + e.getActionCommand());
+                actionPerformedAddImagem();
                 break;
     }   }
     
@@ -124,11 +129,6 @@ public class FormProdutoListener implements InterfaceFormListeners {
                 !form.getBtnEditar().isEnabled());
     }
 
-    @Override
-    public void cancelAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Disabilita todos os JTextFields para edição 
      */
@@ -188,7 +188,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
 
     @Override
     public void actionPerfomedEditar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FormListaProduto.main(null);
     }
 
     @Override
@@ -197,6 +197,19 @@ public class FormProdutoListener implements InterfaceFormListeners {
         disableEditTexts();
         turnButtonsOf();
         produto = null;
+    }
+
+    private void actionPerformedAddImagem() {
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(null);
+        File file = fc.getSelectedFile();
+        String filename = file.getAbsolutePath();
+        ImageIcon picture = new ImageIcon(filename);                
+        Image image = picture.getImage();            
+        Image newImage = image.getScaledInstance(200, 200, 
+                java.awt.Image.SCALE_SMOOTH);        
+        picture = new ImageIcon(newImage); 
+        form.getLblImagem().setIcon(picture);
     }
     
     

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 public class FormCliente extends JFrame {
     
     private final FormClienteListener listener;
-    private DefaultListModel listModel;
+    private final DefaultListModel listModel;
 
     /**
      * Creates new form FormCliente
@@ -135,7 +135,8 @@ public class FormCliente extends JFrame {
 			frameSize.width = screenSize.width;
 		if ( frameSize.height > screenSize.height )
 			frameSize.height = screenSize.height;
-		frame.setLocation ( (screenSize.width - frameSize.width ) >> 1, (screenSize.height - frameSize.height) >> 1 );
+		frame.setLocation ( (screenSize.width - frameSize.width ) >> 1, 
+                        (screenSize.height - frameSize.height) >> 1 );
     }
     
     /**
