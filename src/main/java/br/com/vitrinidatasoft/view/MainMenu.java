@@ -115,7 +115,7 @@ public class MainMenu extends javax.swing.JFrame {
         lblBtnPedido.setForeground(new java.awt.Color(0, 51, 255));
         lblBtnPedido.setText("Pedido");
 
-        btnSair.setText("Sair");
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_sair.png"))); // NOI18N
         btnSair.setActionCommand("EXIT_SYSTEM");
         btnSair.setMaximumSize(new java.awt.Dimension(153, 129));
         btnSair.setMinimumSize(new java.awt.Dimension(153, 129));
@@ -135,12 +135,14 @@ public class MainMenu extends javax.swing.JFrame {
         menuArquivo.add(menuItemCliente);
         menuItemCliente.getAccessibleContext().setAccessibleName("menuItemCliente");
 
+        menuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_menu_produtos.png"))); // NOI18N
         menuItemProduto.setActionCommand("OPEN_FORM_PRODUTO");
         menuItemProduto.setLabel("Produto");
         menuItemProduto.setName("menuItemProduto"); // NOI18N
         menuArquivo.add(menuItemProduto);
         menuItemProduto.getAccessibleContext().setAccessibleName("menuItemProduto");
 
+        menuItemPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_menu_pedido.png"))); // NOI18N
         menuItemPedido.setText("Pedido");
         menuItemPedido.setActionCommand("OPEN_FORM_PEDIDO");
         menuItemPedido.setName("menuItemPedido"); // NOI18N

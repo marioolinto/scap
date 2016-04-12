@@ -5,10 +5,26 @@
  */
 package br.com.vitrinidatasoft.service;
 
+import br.com.vitrinidatasoft.controler.PedidoDao;
+import br.com.vitrinidatasoft.model.Pedido;
+
 /**
  *
  * @author mrhell
  */
 public class PedidoService {
+    
+    private final PedidoDao pedidoDao;
+
+    public PedidoService() {
+        this.pedidoDao = new PedidoDao();
+    }
+    
+    public void persist(Pedido pedido){
+        pedidoDao.openTransaction();
+        pedidoDao.persist(pedido);
+        pedidoDao.closeTransaction();
+    }
+          
     
 }

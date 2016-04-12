@@ -6,7 +6,10 @@
 package br.com.vitrinidatasoft.view;
 
 import br.com.vitrinidatasoft.Listeners.ListaProdutoListener;
+import br.com.vitrinidatasoft.model.Produto;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -14,14 +17,18 @@ import javax.swing.JTextField;
  *
  * @author mrhell
  */
-public class FormListaProduto extends javax.swing.JFrame {
+public class DialogListaProduto extends JDialog {
     
-    private ListaProdutoListener listener;   
+    private final ListaProdutoListener listener; 
+    private Produto produto;
     
     /**
      * Creates new form NovoJFrame
+     * @param parent
+     * @param modal
      */
-    public FormListaProduto() {
+    public DialogListaProduto(JFrame parent, boolean modal) {
+        super(parent, modal);        
         initComponents();
         listener = new ListaProdutoListener(this);
         listener.loadListaProduto();        
@@ -37,6 +44,14 @@ public class FormListaProduto extends javax.swing.JFrame {
 
     public JTextField getTxtProduto() {
         return txtProduto;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
     
     
@@ -58,7 +73,6 @@ public class FormListaProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Produtos");
         setMinimumSize(new java.awt.Dimension(782, 491));
-        setPreferredSize(new java.awt.Dimension(782, 491));
 
         txtProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -130,21 +144,30 @@ public class FormListaProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormListaProduto().setVisible(true);
+                DialogListaProduto dialog = new DialogListaProduto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                       dialog.dispose();
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

@@ -51,7 +51,6 @@ public class FormClienteListener implements InterfaceFormListeners{
      */
     @Override
     public void resetFields(){
-        form.getCmbTipoDeVia().setSelectedIndex(0);
         
         if (model != null && !model.isEmpty())
             model.clear();
@@ -217,12 +216,7 @@ public class FormClienteListener implements InterfaceFormListeners{
         String nome = form.getTxtNome().getText();
         String rg = form.getTxtRG().getText();
         String cpg = form.getTxtCPF().getText();
-        String endereco = form.getCmbTipoDeVia().getSelectedItem().toString() +
-               form.getTxtNomeVia().getText() + ", Número: " + 
-               form.getTxtNumero().getText() + ", Bairro: " + 
-               form.getTxtBairro().getText() + ", Complemento: " +
-               form.getTxtComplemento() + ", CEP: " +
-               form.getTxtCEP().getText();      
+        String endereco = form.geTxtEndereco().getText();
         String email = form.getTxtEMail().getText();
         
         if (checkFieldLists(form.getTxtNome().getText(), 
@@ -288,6 +282,7 @@ public class FormClienteListener implements InterfaceFormListeners{
             form.getTxtNome().setText(cliente.getNome());
             form.getTxtRG().setText(cliente.getRg());
             form.getTxtCPF().setText(cliente.getCpf());
+            form.geTxtEndereco().setText(cliente.getEndereco());
         }
     }
 }

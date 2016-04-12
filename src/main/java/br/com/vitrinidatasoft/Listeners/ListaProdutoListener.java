@@ -8,26 +8,32 @@ package br.com.vitrinidatasoft.Listeners;
 import br.com.vitrinidatasoft.model.Produto;
 import br.com.vitrinidatasoft.model.ProdutoTableModel;
 import br.com.vitrinidatasoft.service.ProdutoService;
-import br.com.vitrinidatasoft.view.FormListaProduto;
+import br.com.vitrinidatasoft.view.DialogListaProduto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
+//import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author mrhell
  */
-public class ListaProdutoListener implements ActionListener{
+public class ListaProdutoListener implements ActionListener,
+        ListSelectionListener, MouseListener{
     
-    private final FormListaProduto formListaProduto;
+    private final DialogListaProduto formListaProduto;
     private final String FILTER = "FILTER";
     private ProdutoTableModel produtoTableModel;
     private ProdutoService produtoService;
+    private Produto produto;
     
-    public ListaProdutoListener(FormListaProduto formListaProduto){
+    public ListaProdutoListener(DialogListaProduto formListaProduto){
         this.formListaProduto = formListaProduto;
         attachListner();
     }
@@ -38,7 +44,9 @@ public class ListaProdutoListener implements ActionListener{
     }
 
     private void attachListner() {
-        //formListaProduto.getBt
+        formListaProduto.getTblProduto().getSelectionModel().
+                addListSelectionListener(this);
+        formListaProduto.getTblProduto().addMouseListener(this);
     }
     
     public void loadListaProduto(){
@@ -57,10 +65,44 @@ public class ListaProdutoListener implements ActionListener{
                 .getColumn(3).setPreferredWidth(20);
         
         DefaultTableCellRenderer renderer = 
-                new DefaultTableCellHeaderRenderer();
+                new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.RIGHT);
         formListaProduto.getTblProduto().getColumnModel()
                 .getColumn(3).setCellRenderer(renderer);
                 
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        int selectedRow = formListaProduto.getTblProduto().getSelectedRow();
+        produto = produtoTableModel.getProdutos().get(selectedRow);
+        formListaProduto.setProduto(produto);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2){
+           formListaProduto.dispose();
+       }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //do nothing
     }
 }

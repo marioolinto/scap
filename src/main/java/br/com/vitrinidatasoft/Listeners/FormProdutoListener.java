@@ -8,7 +8,7 @@ package br.com.vitrinidatasoft.Listeners;
 import br.com.vitrinidatasoft.model.Produto;
 import br.com.vitrinidatasoft.service.ProdutoService;
 import br.com.vitrinidatasoft.utils.Constantes;
-import br.com.vitrinidatasoft.view.FormListaProduto;
+import br.com.vitrinidatasoft.view.DialogListaProduto;
 import br.com.vitrinidatasoft.view.FormProduto;
 import java.awt.Component;
 import java.awt.Image;
@@ -188,7 +188,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
 
     @Override
     public void actionPerfomedEditar() {
-        FormListaProduto.main(null);
+        DialogListaProduto.main(null);
     }
 
     @Override

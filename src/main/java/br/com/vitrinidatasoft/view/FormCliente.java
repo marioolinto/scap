@@ -10,11 +10,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -64,44 +64,25 @@ public class FormCliente extends JFrame {
         return listaTelefones;
     }
 
-    public JTextField getTxtBairro() {
-        return txtBairro;
-    }
-
-    public JTextField getTxtCEP() {
-        return txtCEP;
-    }
-
     public JTextField getTxtCPF() {
         return txtCPF;
-    }
-
-    public JTextField getTxtComplemento() {
-        return txtComplemento;
     }
 
     public JTextField getTxtNome() {
         return txtNome;
     }
 
-    public JTextField getTxtNumero() {
-        return txtNumero;
-    }
-
+ 
     public JTextField getTxtRG() {
         return txtRG;
     }
-
-    public JTextField getTxtNomeVia() {
-        return txtNomeVia;
-    }        
+         
+    public JTextArea geTxtEndereco(){
+        return txtEndereco;
+    }
     
     public JTextField getTxtNumeroTelefone() {
         return txtNumeroTelefone;
-    }
-
-    public JComboBox<String> getCmbTipoDeVia() {
-        return cmbTipoDeVia;
     }
 
     public JPanel getPanelEndereco() {
@@ -166,16 +147,8 @@ public class FormCliente extends JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         tabbedPane = new javax.swing.JTabbedPane();
         panelEndereco = new javax.swing.JPanel();
-        cmbTipoDeVia = new javax.swing.JComboBox<>();
-        txtNomeVia = new javax.swing.JTextField();
-        lblNumero = new javax.swing.JLabel();
-        txtNumero = new javax.swing.JTextField();
-        lblBairro = new javax.swing.JLabel();
-        txtBairro = new javax.swing.JTextField();
-        lblComplemento = new javax.swing.JLabel();
-        txtComplemento = new javax.swing.JTextField();
-        lblCEP = new javax.swing.JLabel();
-        txtCEP = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtEndereco = new javax.swing.JTextArea();
         panelContato = new javax.swing.JPanel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -277,28 +250,9 @@ public class FormCliente extends JFrame {
 
         panelEndereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cmbTipoDeVia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cmbTipoDeVia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avenida", "Rua", "Travessa" }));
-
-        txtNomeVia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        lblNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNumero.setText("Número");
-
-        lblBairro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblBairro.setText("Bairro");
-
-        txtBairro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        lblComplemento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblComplemento.setText("Complemento");
-
-        txtComplemento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        lblCEP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblCEP.setText("CEP");
-
-        txtCEP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEndereco.setColumns(20);
+        txtEndereco.setRows(5);
+        jScrollPane2.setViewportView(txtEndereco);
 
         javax.swing.GroupLayout panelEnderecoLayout = new javax.swing.GroupLayout(panelEndereco);
         panelEndereco.setLayout(panelEnderecoLayout);
@@ -306,54 +260,15 @@ public class FormCliente extends JFrame {
             panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEnderecoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEnderecoLayout.createSequentialGroup()
-                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbTipoDeVia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBairro))
-                        .addGap(31, 31, 31)
-                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEnderecoLayout.createSequentialGroup()
-                                .addComponent(txtNomeVia, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(lblNumero)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtBairro)))
-                    .addGroup(panelEnderecoLayout.createSequentialGroup()
-                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblComplemento)
-                            .addComponent(lblCEP))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtComplemento)
-                            .addGroup(panelEnderecoLayout.createSequentialGroup()
-                                .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(19, 19, 19))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelEnderecoLayout.setVerticalGroup(
             panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEnderecoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbTipoDeVia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeVia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumero)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBairro)
-                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblComplemento)
-                    .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCEP)
-                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabbedPane.addTab("Endereço", panelEndereco);
@@ -541,17 +456,13 @@ public class FormCliente extends JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cmbTipoDeVia;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblBairro;
-    private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblComplemento;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblNumeroTelefone;
     private javax.swing.JLabel lblRG;
     private javax.swing.JLabel lblTitle;
@@ -562,14 +473,10 @@ public class FormCliente extends JFrame {
     private javax.swing.JPanel panelTitle;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JTextField txtBairro;
-    private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextArea txtEndereco;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNomeVia;
-    private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtNumeroTelefone;
     private javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables

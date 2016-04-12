@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  * @author mrhell
  */
 public class ProdutoTableModel extends AbstractTableModel {
-    private final List<Produto> produtos;
+    private List<Produto> produtos;
     private final List<String> columns;
     
     public ProdutoTableModel(List<Produto> produtos){
@@ -51,5 +51,13 @@ public class ProdutoTableModel extends AbstractTableModel {
                 return valor;                
         }
         return null;
-    }        
+    }  
+    
+    public  List<Produto> getProdutos(){
+        return produtos;
+    } 
+    
+    public void setProdutos (List<Produto> produtos){
+        this.produtos = produtos;
+    }
 }
