@@ -68,7 +68,8 @@ public class FormProdutoListener implements InterfaceFormListeners {
             case (Constantes.CARREGAR_IMAGEM):
                 actionPerformedAddImagem();
                 break;
-    }   }
+        }   
+    }
     
     public boolean chekFieldLists(String nome, String descricao, Float valor){
          if (nome.equals("")){
@@ -188,7 +189,14 @@ public class FormProdutoListener implements InterfaceFormListeners {
 
     @Override
     public void actionPerfomedEditar() {
-        DialogListaProduto.main(null);
+        DialogListaProduto dialogListaProduto = 
+                new DialogListaProduto(form, true);
+        dialogListaProduto.setLocationRelativeTo(form);
+        dialogListaProduto.setVisible(true);
+        produto = dialogListaProduto.getProduto();
+        
+        fillData();
+        
     }
 
     @Override
@@ -211,6 +219,18 @@ public class FormProdutoListener implements InterfaceFormListeners {
         picture = new ImageIcon(newImage); 
         form.getLblImagem().setIcon(picture);
     }
-    
-    
+
+    private void fillData() {
+        if (produto != null){
+            nome = produto.getNome();
+            descricao = produto.getDescricao();
+            valor = produto.getValor();
+            
+            form.getTxtNome().setText(nome);
+            form.getTxtDescricao().setText(descricao);
+            form.getTxtValor().setText(valor.toString());
+            
+            enableEditTexts();
+        }
+    }        
 }

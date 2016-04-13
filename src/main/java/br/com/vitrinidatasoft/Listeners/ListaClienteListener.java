@@ -73,8 +73,7 @@ public class ListaClienteListener implements ActionListener,
     public void valueChanged(ListSelectionEvent e) {
        int selectedRow = dialogListaCliente.getTblCliente().getSelectedRow();
        cliente = clienteTableModel.getClientes().get(selectedRow);
-       dialogListaCliente.setCliente(cliente);
-       System.out.println("Cliente " + cliente.toString());
+       dialogListaCliente.setCliente(cliente);       
     }
 
     @Override

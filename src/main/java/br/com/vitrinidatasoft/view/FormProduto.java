@@ -163,7 +163,7 @@ public class FormProduto extends javax.swing.JFrame {
         txtValor.setName("txtValor"); // NOI18N
 
         lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_client.png"))); // NOI18N
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera.png"))); // NOI18N
         lblImagem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblImagem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
