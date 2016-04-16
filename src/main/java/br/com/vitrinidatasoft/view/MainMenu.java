@@ -6,11 +6,9 @@
 package br.com.vitrinidatasoft.view;
 
 import br.com.vitrinidatasoft.Listeners.MainMenuListener;
-import br.com.vitrinidatasoft.controler.DataBaseFactory;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -49,6 +47,7 @@ public class MainMenu extends javax.swing.JFrame {
         lblBtnPedido = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         lblBtnSair = new javax.swing.JLabel();
+        btnUltimosPedidos = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuItemCliente = new javax.swing.JMenuItem();
@@ -117,14 +116,14 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_sair.png"))); // NOI18N
         btnSair.setActionCommand("EXIT_SYSTEM");
-        btnSair.setMaximumSize(new java.awt.Dimension(153, 129));
-        btnSair.setMinimumSize(new java.awt.Dimension(153, 129));
         btnSair.setName("btnSair"); // NOI18N
-        btnSair.setPreferredSize(new java.awt.Dimension(153, 129));
 
         lblBtnSair.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblBtnSair.setForeground(new java.awt.Color(0, 51, 255));
         lblBtnSair.setText("Sair");
+
+        btnUltimosPedidos.setText("Ultimos Pedidos");
+        btnUltimosPedidos.setActionCommand("OPEN_FORM_ULTIMOS_PEDIDOS");
 
         menuArquivo.setText("Arquivo");
 
@@ -166,9 +165,9 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -176,38 +175,42 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(lblBtnCliente)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(lblBtnProduto)
                         .addGap(76, 76, 76)
                         .addComponent(lblBtnPedido)
-                        .addGap(109, 109, 109)
-                        .addComponent(lblBtnSair)))
-                .addGap(123, 123, 123))
+                        .addGap(288, 288, 288)
+                        .addComponent(lblBtnSair))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUltimosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProduto)
-                    .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUltimosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblBtnCliente)
                     .addComponent(lblBtnProduto)
-                    .addComponent(lblBtnPedido)
-                    .addComponent(lblBtnSair))
-                .addGap(0, 119, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblBtnPedido)
+                        .addComponent(lblBtnSair)))
+                .addGap(101, 101, 101))
         );
 
         btnCliente.getAccessibleContext().setAccessibleName("btnCliente");
@@ -250,6 +253,11 @@ public class MainMenu extends javax.swing.JFrame {
     public JMenuItem getMenuItemPedido() {
         return menuItemPedido;
     }
+
+    public JButton getBtnUltimosPedidos() {
+        return btnUltimosPedidos;
+    }
+        
     
     public void centerScreen(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -309,6 +317,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnUltimosPedidos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBtnCliente;

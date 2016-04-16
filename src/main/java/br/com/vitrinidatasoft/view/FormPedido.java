@@ -25,17 +25,22 @@ import javax.swing.JTextField;
 public class FormPedido extends javax.swing.JFrame {
     
     private FormPedidoListener listener;
+    private static FormPedido instance = null;
 
     /**
      * Creates new form FormPedido
      */
-    public FormPedido() {
+    private FormPedido() {
         initComponents();
         listener = new FormPedidoListener(this);
         listener.turnButtonsOf();
         listener.disableEditTexts();
     }
-
+    
+    public static FormPedido getInstance(){
+        return instance;
+    }
+    
     public JButton getBtnBuscarCliente() {
         return btnBuscarCliente;
     }
@@ -241,6 +246,11 @@ public class FormPedido extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Pedido");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlTitle.setBackground(new java.awt.Color(255, 255, 255));
         pnlTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -727,6 +737,10 @@ public class FormPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        instance = null;
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -758,6 +772,7 @@ public class FormPedido extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 FormPedido formPedido = new FormPedido();
+                instance = formPedido;
                 formPedido.centerScreen();
                 formPedido.setVisible(true);
             }

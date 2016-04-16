@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 public class DialogListaCliente extends javax.swing.JDialog {
     
     private final ListaClienteListener listener;   
-    private Cliente cliente;
+    private Cliente cliente; 
     
     /**
      * Cria o dialog DialogListaCliente

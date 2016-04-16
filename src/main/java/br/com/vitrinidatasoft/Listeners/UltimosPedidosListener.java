@@ -6,9 +6,13 @@
 package br.com.vitrinidatasoft.Listeners;
 
 import br.com.vitrinidatasoft.model.Cliente;
+import br.com.vitrinidatasoft.model.Pedido;
+import br.com.vitrinidatasoft.model.PedidoTableModel;
+import br.com.vitrinidatasoft.service.PedidoService;
 import br.com.vitrinidatasoft.view.DialogListaCliente;
 import br.com.vitrinidatasoft.view.FormUltimosPedidos;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 /**
  *
@@ -22,6 +26,7 @@ public class UltimosPedidosListener implements InterfaceFormListeners{
     
     public UltimosPedidosListener(FormUltimosPedidos formUltimosPedidos){
         this.formUltimosPedidos = formUltimosPedidos;
+        attachListener();
     }
 
     @Override
@@ -78,14 +83,15 @@ public class UltimosPedidosListener implements InterfaceFormListeners{
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case (BUSCAR_CLIENTE):
-                buscarCliente();
+                buscarCliente();                
                 break;
         }
+        System.out.println(e);
     }
 
     private void buscarCliente() {
- DialogListaCliente dialogListaCliente = 
-        new DialogListaCliente(formUltimosPedidos, true);
+        DialogListaCliente dialogListaCliente = 
+                new DialogListaCliente(formUltimosPedidos, true);
         dialogListaCliente.setLocationRelativeTo(formUltimosPedidos);
         dialogListaCliente.setVisible(true);
         cliente = dialogListaCliente.getCliente();
@@ -96,9 +102,17 @@ public class UltimosPedidosListener implements InterfaceFormListeners{
     private void fillDataCliente() {
         if (cliente != null){
             formUltimosPedidos.getLblFieldNome().setText(cliente.getNome());
-            formUltimosPedidos.getLblFieldCpf().setText(cliente.getCpf());            
+            formUltimosPedidos.getLblFieldCpf().setText(cliente.getCpf());  
+            loadPedidos(cliente);
         }
         
     }
     
+    public void loadPedidos(Cliente cliente){
+        PedidoService pedidoService = new PedidoService();
+        List<Pedido> pedidos = pedidoService.findByClient(cliente);
+        PedidoTableModel model = new PedidoTableModel(pedidos);
+        formUltimosPedidos.getTblPedidos().setModel(model);
+        
+    }
 }

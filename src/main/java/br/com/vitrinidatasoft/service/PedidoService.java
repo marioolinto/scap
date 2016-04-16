@@ -6,7 +6,9 @@
 package br.com.vitrinidatasoft.service;
 
 import br.com.vitrinidatasoft.controler.PedidoDao;
+import br.com.vitrinidatasoft.model.Cliente;
 import br.com.vitrinidatasoft.model.Pedido;
+import java.util.List;
 
 /**
  *
@@ -24,6 +26,13 @@ public class PedidoService {
         pedidoDao.openTransaction();
         pedidoDao.persist(pedido);
         pedidoDao.closeTransaction();
+    }
+    
+    public List<Pedido> findByClient(Cliente cliente){
+        pedidoDao.openCurrentManager();
+        List<Pedido> list = pedidoDao.findByClient(cliente);
+        pedidoDao.closeCurrentManager();
+        return list;
     }
           
     

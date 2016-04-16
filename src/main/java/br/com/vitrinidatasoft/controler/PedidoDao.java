@@ -1,11 +1,11 @@
 package br.com.vitrinidatasoft.controler;
 
+import br.com.vitrinidatasoft.model.Cliente;
 import br.com.vitrinidatasoft.model.Pedido;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,6 +75,14 @@ public class PedidoDao implements InterfaceDao<Pedido, Long>{
     @Override
     public List<Pedido> findAll() {
         String queryString = "From Pedido";
+        Query query = currentManager.createQuery(queryString);
+        List<Pedido> pedidos = query.getResultList();
+        return pedidos;
+    }
+    
+    public List<Pedido> findByClient(Cliente cliente) {
+        String queryString = "Select pedido From Pedido pedido where " + 
+                "pedido.cliente.id = " + cliente.getId();
         Query query = currentManager.createQuery(queryString);
         List<Pedido> pedidos = query.getResultList();
         return pedidos;

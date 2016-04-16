@@ -25,11 +25,12 @@ public class FormCliente extends JFrame {
     
     private final FormClienteListener listener;
     private final DefaultListModel listModel;
+    private static FormCliente instance = null;
 
     /**
      * Creates new form FormCliente
      */
-    public FormCliente() {
+    private FormCliente() {
         initComponents();        
         listener = new FormClienteListener(this);
         listener.turnButtonsOf();
@@ -38,7 +39,9 @@ public class FormCliente extends JFrame {
         listaTelefones.setModel(listModel);                
     }        
     
-    
+    public static FormCliente getInstance(){                         
+        return instance;
+    }
     
     public JButton getBtnCancelar() {
         return btnCancelar;
@@ -77,7 +80,7 @@ public class FormCliente extends JFrame {
         return txtRG;
     }
          
-    public JTextArea geTxtEndereco(){
+    public JTextArea getTxtEndereco(){
         return txtEndereco;
     }
     
@@ -161,6 +164,11 @@ public class FormCliente extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cliente");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelTitle.setBackground(new java.awt.Color(255, 255, 255));
         panelTitle.setPreferredSize(new java.awt.Dimension(550, 100));
@@ -251,6 +259,7 @@ public class FormCliente extends JFrame {
         panelEndereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtEndereco.setColumns(20);
+        txtEndereco.setLineWrap(true);
         txtEndereco.setRows(5);
         jScrollPane2.setViewportView(txtEndereco);
 
@@ -413,6 +422,10 @@ public class FormCliente extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        instance = null;
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -442,8 +455,9 @@ public class FormCliente extends JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FormCliente form = new FormCliente();                
+            public void run() {                
+                FormCliente form = new FormCliente();  
+                instance = form;
                 form.centerScreen();
                 form.setVisible(true);
             }

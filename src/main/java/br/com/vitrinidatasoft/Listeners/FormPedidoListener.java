@@ -28,8 +28,6 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 
 /**
@@ -88,14 +86,19 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
     public void resetFields() {
         formPedido.getLblFieldNumeroPedido().setText("");
         formPedido.getLblFieldData().setText("__/__/____");
+        formPedido.getTxtDataEntrega().setText("__/__/____");
         formPedido.getLblFieldNome().setText("--");        
         formPedido.getLblFieldEndereco().setText("--");
+        formPedido.getLblFieldCpf().setText("--");
         formPedido.getLblQuantidadeTotal().setText("0,00");        
         formPedido.getLblTotalPedido().setText("0,00");
         formPedido.getLblValorTotal().setText("0,00");
         formPedido.getTxtQuantidade().setText("");
         formPedido.getTxtValor().setText("");
         formPedido.getTxtProduto().setText("");
+        formPedido.getTxtEnderecoEntrega().setText("");
+        formPedido.getTxtObservacao().setText("");
+        formPedido.getTxtDesconto().setText("0,00");
                 
         itens.clear();
         model = new PedidoItensTableModel(itens);
@@ -208,7 +211,7 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
           calendar.setTime(format.parse(dataEntrega)); 
           pedido.setDataEntrega(calendar);                    
        }catch(Exception e){
-          e.printStackTrace();
+           System.out.println(e);
        }        
        
        pedido.setEndereco(formPedido.getTxtEnderecoEntrega().getText());

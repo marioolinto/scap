@@ -8,9 +8,11 @@ package br.com.vitrinidatasoft.Listeners;
 import br.com.vitrinidatasoft.view.FormCliente;
 import br.com.vitrinidatasoft.view.FormPedido;
 import br.com.vitrinidatasoft.view.FormProduto;
+import br.com.vitrinidatasoft.view.FormUltimosPedidos;
 import br.com.vitrinidatasoft.view.MainMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,11 +24,8 @@ public class MainMenuListener implements ActionListener {
     private final String OPEN_FORM_CLIENTE = "OPEN_FORM_CLIENTE";
     private final String OPEN_FORM_PRODUTO = "OPEN_FORM_PRODUTO";
     private final String OPEN_FORM_PEDIDO = "OPEN_FORM_PEDIDO";
-    private final String EXIT_SYSTEM = "EXIT_SYSTEM";
-//    private FormCliente formCliente;
-//    private FormProduto formProduto;
-//    private FormPedido formPedido; 
-   
+    private final String OPEN_FORM_ULTIMOS_PEDIDOS = "OPEN_FORM_ULTIMOS_PEDIDOS"; 
+    private final String EXIT_SYSTEM = "EXIT_SYSTEM";   
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public MainMenuListener(MainMenu mainMenu){
@@ -43,19 +42,32 @@ public class MainMenuListener implements ActionListener {
         mainMenu.getMenuItemCliente().addActionListener(this);
         mainMenu.getMenuItemProduto().addActionListener(this);
         mainMenu.getMenuItemPedido().addActionListener(this);
+        mainMenu.getBtnUltimosPedidos().addActionListener(this);
     }
     
-    private void showFormCliente(){       
-       FormCliente.main(null);
+    private void showFormCliente(){               
+        if (FormCliente.getInstance() == null){
+            FormCliente.main(null);
+        } else {
+            System.out.println("Instancia Formulário de Clientes já aberto");            
+        }   
           
     }
     
     private void showFormProduto(){
-        FormProduto.main(null);
+        if (FormProduto.getInstance() == null){
+            FormProduto.main(null);
+        } else {
+            System.out.println("Instancia Formulário de Produtos já aberto");
+        }
     }
     
     private void showFormPedido(){
-       FormPedido.main(null);
+        if (FormPedido.getInstance() == null){
+            FormPedido.main(null);
+        } else {
+            System.out.println("Instancia Formulário de Pedidos já aberto");
+        }
     }
     
     private void shutDown(){
@@ -74,11 +86,16 @@ public class MainMenuListener implements ActionListener {
             case OPEN_FORM_PEDIDO:
                 showFormPedido();
                 break;
+            case OPEN_FORM_ULTIMOS_PEDIDOS:
+                showFormUltimosPedidos();
+                break;
             case EXIT_SYSTEM:
                 shutDown();
                 break;
-        }    
-        
-        System.out.println(e);
+        }                    
+    }
+
+    private void showFormUltimosPedidos() {
+        FormUltimosPedidos.main(null);
     }
 }

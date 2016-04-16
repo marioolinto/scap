@@ -13,6 +13,8 @@ import br.com.vitrinidatasoft.utils.Constantes;
 import br.com.vitrinidatasoft.view.DialogListaCliente;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,6 +29,7 @@ public class FormClienteListener implements InterfaceFormListeners{
     private DefaultListModel model;  
     private Cliente cliente;
     private Telefone telefone;
+    private List<Telefone> telefones;
             
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public FormClienteListener(FormCliente formCliente){
@@ -55,6 +58,7 @@ public class FormClienteListener implements InterfaceFormListeners{
         if (model != null && !model.isEmpty())
             model.clear();
         
+        form.getTxtEndereco().setText("");
         form.getTabbedPane().setSelectedIndex(0);
         Component[] components = form.getPanelData().getComponents();
         for (Component component : components){
@@ -131,7 +135,8 @@ public class FormClienteListener implements InterfaceFormListeners{
     }
     
     @Override
-    public void disableEditTexts() {       
+    public void disableEditTexts() {
+        form.getTxtEndereco().setEditable(false);
         Component[] components = form.getPanelData().getComponents();
         for (Component component : components){
             if (component instanceof JTextField){
@@ -163,6 +168,7 @@ public class FormClienteListener implements InterfaceFormListeners{
      */
     @Override
     public void enableEditTexts() {
+        form.getTxtEndereco().setEditable(true);
         Component[] components = form.getPanelData().getComponents();
         for (Component component : components){
             if (component instanceof JTextField){
@@ -190,13 +196,15 @@ public class FormClienteListener implements InterfaceFormListeners{
     
     public boolean checkFieldLists(String nome, String cpf){
         if (nome.equals("")){
-            JOptionPane.showMessageDialog(form, "Campo Nome do Cliente obrigatório!", 
+            JOptionPane.showMessageDialog(form, 
+                    "Campo Nome do Cliente obrigatório!", 
                     "Erro de Gravação", JOptionPane.ERROR_MESSAGE);
             return false;
         }                
         
         if (cpf.equals("")){
-            JOptionPane.showMessageDialog(form, "Campo CPF ou CNPJ obrigatório!", 
+            JOptionPane.showMessageDialog(form, 
+                    "Campo CPF ou CNPJ obrigatório!", 
                     "Erro de Gravação", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -208,7 +216,7 @@ public class FormClienteListener implements InterfaceFormListeners{
     public void actionPerformedNovo() {
         cliente = new Cliente();
         turnButtonsOn();
-        enableEditTexts();         
+        enableEditTexts();        
     }
 
     @Override
@@ -216,7 +224,7 @@ public class FormClienteListener implements InterfaceFormListeners{
         String nome = form.getTxtNome().getText();
         String rg = form.getTxtRG().getText();
         String cpg = form.getTxtCPF().getText();
-        String endereco = form.geTxtEndereco().getText();
+        String endereco = form.getTxtEndereco().getText();
         String email = form.getTxtEMail().getText();
         
         if (checkFieldLists(form.getTxtNome().getText(), 
@@ -228,7 +236,11 @@ public class FormClienteListener implements InterfaceFormListeners{
            cliente.setEmail(email);
            
            ClienteService clietService = new ClienteService();
-           clietService.persist(cliente);
+           
+           if (cliente.getId() == null)
+                clietService.persist(cliente);
+           else
+               clietService.update(cliente);
            
            turnButtonsOf();
            resetFields();           
@@ -245,6 +257,9 @@ public class FormClienteListener implements InterfaceFormListeners{
         dialogListaCliente.setLocationRelativeTo(form);
         dialogListaCliente.setVisible(true);
         cliente = dialogListaCliente.getCliente();
+        
+        ClienteService clienteService = new ClienteService();
+        telefones = clienteService.findAllContacts(cliente);
         
         fillData();
             
@@ -277,12 +292,25 @@ public class FormClienteListener implements InterfaceFormListeners{
     }
 
     private void fillData() {
-        if (cliente != null){
-            
+        if (cliente != null){            
             form.getTxtNome().setText(cliente.getNome());
             form.getTxtRG().setText(cliente.getRg());
             form.getTxtCPF().setText(cliente.getCpf());
-            form.geTxtEndereco().setText(cliente.getEndereco());
+            form.getTxtEndereco().setText(cliente.getEndereco());
+            form.getTxtEMail().setText(cliente.getEmail());
+            
+            
+            model = (DefaultListModel)form.getListaTelefones().getModel();
+            
+            for (int i=0; i < telefones.size(); i++){
+                telefone = telefones.get(i);
+                model.addElement(telefone.getNumero());
+            }
+            
+            
+
+            enableEditTexts();
+            turnButtonsOn();
         }
     }
 }

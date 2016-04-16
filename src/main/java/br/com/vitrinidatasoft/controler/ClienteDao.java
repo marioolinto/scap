@@ -1,6 +1,7 @@
 package br.com.vitrinidatasoft.controler;
 
 import br.com.vitrinidatasoft.model.Cliente;
+import br.com.vitrinidatasoft.model.Telefone;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -62,7 +63,11 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
 
     @Override
     public void update(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            currentManager.merge(cliente);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
     }
 
     @Override
@@ -82,7 +87,15 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
         
         return clientes;
     }
-
+    
+    public List<Telefone> findAllContacts(Cliente cliente){       
+        String queryString = "Select telefone From Telefone telefone " + 
+                "Where telefone.cliente.id = " + cliente.getId();
+        Query query = currentManager.createQuery(queryString);
+        List<Telefone> telefones = query.getResultList();
+        return telefones;
+    }
+    
     @Override
     public void delete(Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

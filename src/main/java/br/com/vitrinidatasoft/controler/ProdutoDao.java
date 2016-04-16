@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,8 +51,12 @@ public class ProdutoDao implements InterfaceDao<Produto, Long>{
     }
 
     @Override
-    public void update(Produto entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Produto produto) {
+         try{
+           currentManager.merge(produto);
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     @Override

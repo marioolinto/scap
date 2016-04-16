@@ -21,15 +21,20 @@ import javax.swing.JTextField;
 public class FormProduto extends javax.swing.JFrame {
     
     FormProdutoListener listener;
+    private static FormProduto instance = null;
 
     /**
      * Creates new form FormProduto
      */
-    public FormProduto() {
+    private FormProduto() {
         initComponents();
         listener = new FormProdutoListener(this);
         listener.turnButtonsOf();
         listener.disableEditTexts();
+    }
+    
+    public static FormProduto getInstance(){
+        return instance;
     }
 
     public JButton getBtnCancelar() {
@@ -116,6 +121,11 @@ public class FormProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Produto");
         setLocationByPlatform(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelTitle.setBackground(new java.awt.Color(255, 255, 255));
         panelTitle.setPreferredSize(new java.awt.Dimension(550, 100));
@@ -160,6 +170,7 @@ public class FormProduto extends javax.swing.JFrame {
         lblValor.setText("Valor");
 
         txtValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtValor.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtValor.setName("txtValor"); // NOI18N
 
         lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -283,6 +294,10 @@ public class FormProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        instance = null;
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +329,7 @@ public class FormProduto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 FormProduto formProduto = new FormProduto();
+                instance = formProduto;
                 formProduto.centerScreen();
                 formProduto.setVisible(true);
             }

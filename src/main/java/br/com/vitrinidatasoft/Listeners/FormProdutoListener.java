@@ -30,6 +30,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
     private String nome;
     private String descricao;
     private Float valor;
+    private String imagePath;
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public FormProdutoListener(FormProduto formProduto){
@@ -163,7 +164,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
         produto = new Produto();  
         turnButtonsOn();
         enableEditTexts();        
-        form.getTxtNome().requestFocus();
+        form.getTxtNome().requestFocus();       
     }
 
     @Override
@@ -178,11 +179,21 @@ public class FormProdutoListener implements InterfaceFormListeners {
             produto.setNome(nome);
             produto.setDescricao(descricao);
             produto.setValor(valor);
+            
+            if (!"".equals(imagePath))
+                produto.setImagem(imagePath);
+                
             ProdutoService produtoService = new ProdutoService();
-            produtoService.persist(produto);
+            
+            if (produto.getId() == null)
+                produtoService.persist(produto);
+            else
+                produtoService.update(produto);
+            
             resetFields();
             disableEditTexts();
             turnButtonsOf();
+            
             produto = null;
         }  
     }
@@ -212,6 +223,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
         fc.showOpenDialog(null);
         File file = fc.getSelectedFile();
         String filename = file.getAbsolutePath();
+        imagePath = filename;
         ImageIcon picture = new ImageIcon(filename);                
         Image image = picture.getImage();            
         Image newImage = image.getScaledInstance(200, 200, 
@@ -219,18 +231,32 @@ public class FormProdutoListener implements InterfaceFormListeners {
         picture = new ImageIcon(newImage); 
         form.getLblImagem().setIcon(picture);
     }
-
+    
+    private void addImagem(String filename) {               
+        ImageIcon picture = new ImageIcon(filename);                
+        Image image = picture.getImage();            
+        Image newImage = image.getScaledInstance(200, 200, 
+                java.awt.Image.SCALE_SMOOTH);        
+        picture = new ImageIcon(newImage); 
+        form.getLblImagem().setIcon(picture);
+    }
+    
     private void fillData() {
         if (produto != null){
             nome = produto.getNome();
             descricao = produto.getDescricao();
             valor = produto.getValor();
+            imagePath = produto.getImagem();                        
+            
+            if (imagePath != null && !"".equals(imagePath))
+                addImagem(imagePath);
             
             form.getTxtNome().setText(nome);
             form.getTxtDescricao().setText(descricao);
-            form.getTxtValor().setText(valor.toString());
+            form.getTxtValor().setText(valor.toString().replace(".", ","));
             
             enableEditTexts();
+            turnButtonsOn();
         }
     }        
 }

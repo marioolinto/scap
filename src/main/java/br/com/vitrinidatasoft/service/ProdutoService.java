@@ -26,6 +26,12 @@ public class ProdutoService {
         produtoDao.closeTransaction();
     }
     
+    public void update(Produto produto){
+        produtoDao.openTransaction();
+        produtoDao.update(produto);
+        produtoDao.closeTransaction();
+    }
+    
     public List<Produto> findAll(){
         produtoDao.openCurrentManager();
         List<Produto> list = produtoDao.findAll();
