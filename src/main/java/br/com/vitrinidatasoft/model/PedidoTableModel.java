@@ -5,7 +5,9 @@
  */
 package br.com.vitrinidatasoft.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,12 +17,12 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PedidoTableModel extends AbstractTableModel {
     
-    private final List<Pedido> pedidos;
+    private List<Pedido> pedidos;
     private final List<String> columns;
     
     public PedidoTableModel(List<Pedido> pedidos){
         this.pedidos = pedidos;
-        columns = Arrays.asList("Numero", "Data", "Endereco");
+        columns = Arrays.asList("Numero", "Data");
     }
 
     @Override
@@ -38,13 +40,28 @@ public class PedidoTableModel extends AbstractTableModel {
         return columns.size();
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Pedido pedido = pedidos.get(rowIndex);
         switch (columnIndex){
             case 0: return pedido.getNumero();
-            case 1: return pedido.getDataPedido().toString();
-            case 2: return pedido.getEndereco();            
+            case 1: 
+                try{
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");                    
+                    Calendar c = pedido.getDataPedido();
+                    String dataPedido = format.format(c.getTime());
+                    return dataPedido;
+                }catch(Exception e){
+                    System.out.println("Erro "+e.getMessage() );
+                }
         }
         return null;
     }

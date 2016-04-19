@@ -12,7 +12,6 @@ import br.com.vitrinidatasoft.view.FormUltimosPedidos;
 import br.com.vitrinidatasoft.view.MainMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -96,6 +95,8 @@ public class MainMenuListener implements ActionListener {
     }
 
     private void showFormUltimosPedidos() {
-        FormUltimosPedidos.main(null);
+        if (FormUltimosPedidos.getInstance() == null){
+            FormUltimosPedidos.main(null);
+        }
     }
 }

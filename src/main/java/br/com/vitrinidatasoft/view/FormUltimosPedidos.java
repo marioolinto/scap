@@ -6,7 +6,10 @@
 package br.com.vitrinidatasoft.view;
 
 import br.com.vitrinidatasoft.Listeners.UltimosPedidosListener;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -17,15 +20,20 @@ import javax.swing.JTable;
 public class FormUltimosPedidos extends javax.swing.JFrame {
     
     private final UltimosPedidosListener listener;
+    private static FormUltimosPedidos instance;
     
     /**
      * Creates new form FormUltimosPedidos
      */
-    public FormUltimosPedidos() {
+    private FormUltimosPedidos() {
         initComponents();
         listener = new UltimosPedidosListener(this);
     }
 
+    public static FormUltimosPedidos getInstance(){
+        return instance;
+    }    
+    
     public JLabel getLblFieldCpf() {
         return lblFieldCpf;
     }
@@ -46,7 +54,20 @@ public class FormUltimosPedidos extends javax.swing.JFrame {
         return tblPedidos;
     }
     
-    
+    public void centerScreen(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        JFrame frame= this;
+        Dimension frameSize = this.getSize();
+        
+        
+        if ( frameSize.width > screenSize.width )
+			frameSize.width = screenSize.width;
+		if ( frameSize.height > screenSize.height )
+			frameSize.height = screenSize.height;
+		frame.setLocation ( (screenSize.width - frameSize.width ) >> 1, 
+                        (screenSize.height - frameSize.height) >> 1 );
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,28 +93,30 @@ public class FormUltimosPedidos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidoItens = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/last_orders.png"))); // NOI18N
         lblTitle.setText("Últimos Pedidos");
+        lblTitle.setIconTextGap(20);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(19, 19, 19)
                 .addComponent(lblTitle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
                 .addComponent(lblTitle)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pnlCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -244,7 +267,7 @@ public class FormUltimosPedidos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +310,10 @@ public class FormUltimosPedidos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormUltimosPedidos().setVisible(true);
+               FormUltimosPedidos form =  new FormUltimosPedidos();
+               instance = form;
+               form.centerScreen();
+               form.setVisible(true);
             }
         });
     }

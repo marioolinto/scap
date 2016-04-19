@@ -24,7 +24,6 @@ import javax.swing.JTextField;
 public class FormCliente extends JFrame {
     
     private final FormClienteListener listener;
-    private final DefaultListModel listModel;
     private static FormCliente instance = null;
 
     /**
@@ -32,11 +31,7 @@ public class FormCliente extends JFrame {
      */
     private FormCliente() {
         initComponents();        
-        listener = new FormClienteListener(this);
-        listener.turnButtonsOf();
-        listener.disableEditTexts();
-        listModel = new DefaultListModel();
-        listaTelefones.setModel(listModel);                
+        listener = new FormClienteListener(this);                              
     }        
     
     public static FormCliente getInstance(){                         

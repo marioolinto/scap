@@ -34,7 +34,8 @@ public class FormProdutoListener implements InterfaceFormListeners {
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public FormProdutoListener(FormProduto formProduto){
-        this.form = formProduto; 
+        this.form = formProduto;        
+        actionPerformedNovo();
         attachListener();
     }
     
@@ -163,7 +164,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
     public void actionPerformedNovo() {
         produto = new Produto();  
         turnButtonsOn();
-        enableEditTexts();        
+        //enableEditTexts();        
         form.getTxtNome().requestFocus();       
     }
 
@@ -213,7 +214,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
     @Override
     public void actionPerformedCancelar() {
         resetFields();
-        disableEditTexts();
+        //disableEditTexts();
         turnButtonsOf();
         produto = null;
     }

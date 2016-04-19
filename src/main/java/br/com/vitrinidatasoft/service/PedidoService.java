@@ -8,6 +8,7 @@ package br.com.vitrinidatasoft.service;
 import br.com.vitrinidatasoft.controler.PedidoDao;
 import br.com.vitrinidatasoft.model.Cliente;
 import br.com.vitrinidatasoft.model.Pedido;
+import br.com.vitrinidatasoft.model.PedidoItem;
 import java.util.List;
 
 /**
@@ -35,5 +36,10 @@ public class PedidoService {
         return list;
     }
           
-    
+    public List<PedidoItem> findItensByPedido(Pedido pedido){
+        pedidoDao.openCurrentManager();
+        List<PedidoItem> list = pedidoDao.findItensByPedido(pedido);
+        pedidoDao.closeCurrentManager();
+        return list;
+    }
 }

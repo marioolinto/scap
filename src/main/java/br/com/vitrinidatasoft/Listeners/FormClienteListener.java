@@ -13,7 +13,8 @@ import br.com.vitrinidatasoft.utils.Constantes;
 import br.com.vitrinidatasoft.view.DialogListaCliente;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.Iterator;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -23,17 +24,21 @@ import javax.swing.JTextField;
  *
  * @author mrhell
  */
-public class FormClienteListener implements InterfaceFormListeners{
+public class FormClienteListener implements InterfaceFormListeners, 
+        FocusListener{
     
-    private final FormCliente form;
-    private DefaultListModel model;  
+    private final FormCliente form;   
     private Cliente cliente;
     private Telefone telefone;
+    private DefaultListModel listModel;
     private List<Telefone> telefones;
             
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public FormClienteListener(FormCliente formCliente){
-        this.form = formCliente; 
+        this.form = formCliente;
+        listModel = new DefaultListModel();
+        form.getListaTelefones().setModel(listModel);  
+        actionPerformedNovo();
         attachListener();
     }
 
@@ -46,7 +51,8 @@ public class FormClienteListener implements InterfaceFormListeners{
         form.getBtnNovo().addActionListener(this);
         form.getBtnEditar().addActionListener(this);
         form.getBtnCancelar().addActionListener(this);
-        form.getBtnADD().addActionListener(this);        
+        form.getBtnADD().addActionListener(this);
+        form.getTxtCPF().addFocusListener(this);
     }
     
     /**
@@ -55,8 +61,8 @@ public class FormClienteListener implements InterfaceFormListeners{
     @Override
     public void resetFields(){
         
-        if (model != null && !model.isEmpty())
-            model.clear();
+        if (listModel != null && !listModel.isEmpty())
+            listModel.clear();
         
         form.getTxtEndereco().setText("");
         form.getTabbedPane().setSelectedIndex(0);
@@ -216,7 +222,7 @@ public class FormClienteListener implements InterfaceFormListeners{
     public void actionPerformedNovo() {
         cliente = new Cliente();
         turnButtonsOn();
-        enableEditTexts();        
+        //enableEditTexts();        
     }
 
     @Override
@@ -268,7 +274,7 @@ public class FormClienteListener implements InterfaceFormListeners{
     @Override
     public void actionPerformedCancelar() {
         resetFields();
-        disableEditTexts();
+        //disableEditTexts();
         turnButtonsOf();
         telefone = null;
         cliente = null;        
@@ -277,10 +283,10 @@ public class FormClienteListener implements InterfaceFormListeners{
     private void addTelefone() {
         String numero = form.getTxtNumeroTelefone().getText();        
         if (!numero.equals("")){ 
-            model = (DefaultListModel) 
+            listModel = (DefaultListModel) 
             form.getListaTelefones().getModel();
 
-            model.addElement(numero);        
+            listModel.addElement(numero);        
 
             telefone = new Telefone();
             telefone.setTelefone(numero);        
@@ -300,17 +306,26 @@ public class FormClienteListener implements InterfaceFormListeners{
             form.getTxtEMail().setText(cliente.getEmail());
             
             
-            model = (DefaultListModel)form.getListaTelefones().getModel();
+            listModel = (DefaultListModel)form.getListaTelefones().getModel();
             
             for (int i=0; i < telefones.size(); i++){
                 telefone = telefones.get(i);
-                model.addElement(telefone.getNumero());
-            }
-            
-            
-
+                listModel.addElement(telefone.getNumero());
+            }                        
             enableEditTexts();
             turnButtonsOn();
+        }
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        //do nothing;
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        if (e.getComponent().equals(form.getTxtCPF())){
+            System.out.println("É o cpf");
         }
     }
 }

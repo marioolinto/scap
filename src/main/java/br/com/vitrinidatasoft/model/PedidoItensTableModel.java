@@ -25,7 +25,7 @@ public class PedidoItensTableModel extends AbstractTableModel{
 
     @Override
     public String getColumnName(int column) {
-        return columns.get(column); //To change body of generated methods, choose Tools | Templates.
+        return columns.get(column); 
     }        
     
     @Override
@@ -40,7 +40,7 @@ public class PedidoItensTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PedidoItem pedidoItem = itens.get(rowIndex);
+        PedidoItem pedidoItem = (PedidoItem)itens.get(rowIndex);
         switch(columnIndex){
             case (0): return pedidoItem.getProduto().getDescricao();
             case (1): return pedidoItem.getQuantidade();

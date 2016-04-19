@@ -2,6 +2,7 @@ package br.com.vitrinidatasoft.controler;
 
 import br.com.vitrinidatasoft.model.Cliente;
 import br.com.vitrinidatasoft.model.Pedido;
+import br.com.vitrinidatasoft.model.PedidoItem;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -87,7 +88,15 @@ public class PedidoDao implements InterfaceDao<Pedido, Long>{
         List<Pedido> pedidos = query.getResultList();
         return pedidos;
     }
-
+    
+    public List<PedidoItem> findItensByPedido(Pedido pedido) {
+        String queryString = "Select item From PedidoItem item where " + 
+                "item.pedido.id = " + pedido.getId();
+        Query query = currentManager.createQuery(queryString);
+        List<PedidoItem> itens = query.getResultList();
+        return itens;
+    }
+    
     @Override
     public void delete(Pedido entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -28,9 +28,7 @@ public class FormProduto extends javax.swing.JFrame {
      */
     private FormProduto() {
         initComponents();
-        listener = new FormProdutoListener(this);
-        listener.turnButtonsOf();
-        listener.disableEditTexts();
+        listener = new FormProdutoListener(this);        
     }
     
     public static FormProduto getInstance(){
@@ -117,6 +115,7 @@ public class FormProduto extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnCarregarImagem = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Produto");
@@ -216,6 +215,8 @@ public class FormProduto extends javax.swing.JFrame {
         btnCarregarImagem.setText("Carregar Imagem");
         btnCarregarImagem.setActionCommand("CARREGAR_IMAGEM");
 
+        jLabel1.setText("R$");
+
         javax.swing.GroupLayout panelDataLayout = new javax.swing.GroupLayout(panelData);
         panelData.setLayout(panelDataLayout);
         panelDataLayout.setHorizontalGroup(
@@ -224,11 +225,17 @@ public class FormProduto extends javax.swing.JFrame {
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDescricao)
-                            .addComponent(lblNome)
-                            .addComponent(lblValor))
-                        .addGap(18, 18, 18)
+                        .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelDataLayout.createSequentialGroup()
+                                .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDescricao)
+                                    .addComponent(lblNome))
+                                .addGap(18, 18, 18))
+                            .addGroup(panelDataLayout.createSequentialGroup()
+                                .addComponent(lblValor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(3, 3, 3)))
                         .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                             .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,7 +265,8 @@ public class FormProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(86, 86, 86))
             .addGroup(panelDataLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
@@ -342,6 +350,7 @@ public class FormProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblImagem;
