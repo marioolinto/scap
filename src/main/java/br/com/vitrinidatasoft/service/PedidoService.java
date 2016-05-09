@@ -42,4 +42,11 @@ public class PedidoService {
         pedidoDao.closeCurrentManager();
         return list;
     }
+    
+    public Pedido findByNumero(String numero){
+        pedidoDao.openCurrentManager();
+        Pedido pedido = pedidoDao.findByNumero(numero);        
+        pedidoDao.closeCurrentManager();
+        return pedido;
+    }
 }

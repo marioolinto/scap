@@ -79,7 +79,7 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
 
     @Override
     public List<Cliente> findAll() {
-        String queryString = "From Cliente";
+        String queryString = "From Cliente cliente ORDER BY cliente.nome";
         
         Query query; 
         query = currentManager.createQuery(queryString);
@@ -96,9 +96,30 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
         return telefones;
     }
     
+     public String findMainContact(Cliente cliente){       
+        String queryString = "Select telefone.numero From Telefone telefone " + 
+                "Where telefone.cliente.id = " + cliente.getId();
+        Query query = currentManager.createQuery(queryString);
+        String telefone = "";
+        if (!query.getResultList().isEmpty())
+            telefone = query.setMaxResults(1).getSingleResult().toString();
+        
+        return telefone;
+    }
+    
+    public List<Cliente> findFullClient(){
+        String queryString = "FROM Cliente cliente  "
+                + "JOIN FETCH cliente.telefones";
+                                     
+        Query query = currentManager.createQuery(queryString);
+        List<Cliente> clientes = query.getResultList();
+        return clientes;
+        
+    }
+     
     @Override
     public void delete(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 }

@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import net.sf.jasperreports.engine.JasperPrint;
 
 
 /**
@@ -184,9 +185,12 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
     public void actionPerformedNovo() {
         pedido = new Pedido();
         dataPedido = getDate();
-        Double numeroRandom = Math.random(); 
+        
+        Double numeroRandom = Math.random();                                           
         String numeroInicial = numeroRandom.toString();
+        numeroRandom = Math.random();                
         String numeroFinal = numeroRandom.toString();
+        
         numeroPedido = numeroInicial.substring(2,4) + 
                 dataPedido.substring(1, 2) + numeroFinal.substring(2,4);         
         formPedido.getLblFieldNumeroPedido().setText(numeroPedido);        
@@ -396,6 +400,6 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
                 formPedido.getTxtDesconto().getText().replace(",", "."));
         Float valorComDesconto = valorTotal - desconto;
         formPedido.getLblValorTotal().
-                setText(valorComDesconto.toString().replace(".", ","));
+                setText(valorComDesconto.toString().replace(".", ","));        
     }
 }

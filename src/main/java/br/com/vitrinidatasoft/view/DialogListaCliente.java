@@ -9,6 +9,7 @@ import br.com.vitrinidatasoft.Listeners.ListaClienteListener;
 import br.com.vitrinidatasoft.model.Cliente;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -64,6 +65,20 @@ public class DialogListaCliente extends javax.swing.JDialog {
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
     }
+
+    public JRadioButton getRdbEmail() {
+        return rdbEmail;
+    }
+
+    public JRadioButton getRdbNome() {
+        return rdbNome;
+    }
+
+    public JRadioButton getRdbTelefone() {
+        return rdbTelefone;
+    }
+    
+    
     
     public void centerScreen(){
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -89,19 +104,18 @@ public class DialogListaCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtSearch = new javax.swing.JTextField();
-        btnFilter = new javax.swing.JButton();
+        groupFilter = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
+        pnlFilter = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        btnFilter = new javax.swing.JButton();
+        rdbNome = new javax.swing.JRadioButton();
+        rdbTelefone = new javax.swing.JRadioButton();
+        rdbEmail = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
-
-        txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        btnFilter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnFilter.setText("Filtrar");
-        btnFilter.setActionCommand("FILTER");
 
         tblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,6 +132,53 @@ public class DialogListaCliente extends javax.swing.JDialog {
         tblCliente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tblCliente);
 
+        pnlFilter.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
+
+        txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnFilter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFilter.setText("Filtrar");
+        btnFilter.setActionCommand("FILTER");
+
+        groupFilter.add(rdbNome);
+        rdbNome.setText("Nome");
+
+        groupFilter.add(rdbTelefone);
+        rdbTelefone.setText("Telefone");
+
+        groupFilter.add(rdbEmail);
+        rdbEmail.setText("e-mail");
+
+        javax.swing.GroupLayout pnlFilterLayout = new javax.swing.GroupLayout(pnlFilter);
+        pnlFilter.setLayout(pnlFilterLayout);
+        pnlFilterLayout.setHorizontalGroup(
+            pnlFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFilterLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(rdbNome)
+                .addGap(18, 18, 18)
+                .addComponent(rdbTelefone)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(rdbEmail)
+                .addGap(18, 18, 18)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(btnFilter)
+                .addContainerGap())
+        );
+        pnlFilterLayout.setVerticalGroup(
+            pnlFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFilterLayout.createSequentialGroup()
+                .addGroup(pnlFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFilter)
+                    .addGroup(pnlFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdbNome)
+                        .addComponent(rdbTelefone)
+                        .addComponent(rdbEmail)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,23 +186,18 @@ public class DialogListaCliente extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnFilter)))
+                    .addComponent(jScrollPane1)
+                    .addComponent(pnlFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFilter))
+                .addContainerGap()
+                .addComponent(pnlFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -192,7 +248,12 @@ public class DialogListaCliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
+    private javax.swing.ButtonGroup groupFilter;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlFilter;
+    private javax.swing.JRadioButton rdbEmail;
+    private javax.swing.JRadioButton rdbNome;
+    private javax.swing.JRadioButton rdbTelefone;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

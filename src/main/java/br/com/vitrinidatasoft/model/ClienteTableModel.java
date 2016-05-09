@@ -5,6 +5,7 @@
  */
 package br.com.vitrinidatasoft.model;
 
+import br.com.vitrinidatasoft.service.ClienteService;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,15 +18,18 @@ public class ClienteTableModel extends AbstractTableModel{
     
     List<Cliente> clientes;
     List<String> columns;
+    ClienteService service; 
+    
     
     public ClienteTableModel(List<Cliente> clientes){
-        this.clientes = clientes;
-        columns = Arrays.asList("ID", "Nome", "CPF", "e-mail");
+        this.clientes = clientes;        
+        columns = Arrays.asList("Nome", "Telefone", "e-mail");
+        service = new ClienteService(); 
     }
 
     @Override
     public String getColumnName(int column) {
-        return columns.get(column); //To change body of generated methods, choose Tools | Templates.
+        return columns.get(column); 
     }        
 
     @Override
@@ -42,10 +46,10 @@ public class ClienteTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Cliente cliente = clientes.get(rowIndex);
         switch(columnIndex){
-            case(0): return cliente.getId();
-            case(1): return cliente.getNome();
-            case(2): return cliente.getCpf();
-            case(3): return cliente.getEmail();
+            case(0): return cliente.getNome();
+            case(1): String telefone = service.findMainContact(cliente); 
+                     return telefone;
+            case(2): return cliente.getEmail();
         }
                 
         return null;

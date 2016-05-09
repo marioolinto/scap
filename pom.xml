@@ -70,6 +70,12 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+	<version>5.0.4</version>
+</dependency>
+
     </dependencies>    
     
 </project>

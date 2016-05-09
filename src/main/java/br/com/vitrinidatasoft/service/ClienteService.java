@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.vitrinidatasoft.service;
 
 import br.com.vitrinidatasoft.controler.ClienteDao;
@@ -45,6 +40,20 @@ public class ClienteService {
         List<Telefone> list = clienteDao.findAllContacts(cliente);
         clienteDao.closeCurrentManager();
         return list;
+    }
+    
+    public String findMainContact(Cliente cliente){
+        clienteDao.openCurrentManager();
+        String telefone = clienteDao.findMainContact(cliente);
+        clienteDao.closeCurrentManager();
+        return telefone;
+    }
+    
+    public List<Cliente> findFullClient(){
+        clienteDao.openCurrentManager();
+        List<Cliente> clientes = clienteDao.findFullClient();
+        clienteDao.closeCurrentManager();
+        return clientes;
     }
     
 }

@@ -14,8 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -49,13 +51,11 @@ public class ListaClienteListener implements ActionListener,
         
         dialogListaCliente.getTblCliente().setModel(clienteTableModel);
         dialogListaCliente.getTblCliente().getColumnModel().
-                getColumn(0).setPreferredWidth(30);
+                getColumn(0).setPreferredWidth(300);
         dialogListaCliente.getTblCliente().getColumnModel().
-                getColumn(1).setPreferredWidth(300);           
+                getColumn(1).setPreferredWidth(100);           
         dialogListaCliente.getTblCliente().getColumnModel().
-                getColumn(2).setPreferredWidth(100);
-       dialogListaCliente.getTblCliente().getColumnModel().
-                getColumn(3).setPreferredWidth(300);
+                getColumn(2).setPreferredWidth(300);
     }
     
     private void attachListener() {
@@ -66,7 +66,19 @@ public class ListaClienteListener implements ActionListener,
     }
 
     private void actionPerformedFilter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer column = 0;
+        
+        if (dialogListaCliente.getRdbNome().isSelected())
+            column = 0;
+        else if(dialogListaCliente.getRdbTelefone().isSelected())             
+            column = 1;
+        else
+            column = 2;
+        
+        String search = dialogListaCliente.getTxtSearch().getText();                
+        filter(search, column);
+        
+        
     }
 
     @Override
@@ -101,6 +113,14 @@ public class ListaClienteListener implements ActionListener,
     @Override
     public void mouseExited(MouseEvent e) {
         //do nothing
+    }
+
+    private void filter(String search, Integer column) {
+        RowFilter filter = RowFilter.regexFilter(search, column);
+        TableRowSorter<ClienteTableModel> sorter = 
+                new TableRowSorter(clienteTableModel);
+        sorter.setRowFilter(filter);
+        dialogListaCliente.getTblCliente().setRowSorter(sorter);
     }
     
     

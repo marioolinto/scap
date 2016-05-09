@@ -97,6 +97,15 @@ public class PedidoDao implements InterfaceDao<Pedido, Long>{
         return itens;
     }
     
+    public Pedido findByNumero(String numero){
+        Pedido pedido;
+        String queryString = "Select pedido From Pedido pedido where " + 
+                "pedido.numero = " + numero;
+        Query query = currentManager.createQuery(queryString);
+        pedido = (Pedido)query.getSingleResult();       
+        return pedido;
+    }
+    
     @Override
     public void delete(Pedido entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

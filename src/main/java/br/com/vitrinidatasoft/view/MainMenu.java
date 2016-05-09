@@ -55,7 +55,13 @@ public class MainMenu extends javax.swing.JFrame {
         menuItemCliente = new javax.swing.JMenuItem();
         menuItemProduto = new javax.swing.JMenuItem();
         menuItemPedido = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuItemRelatorioCliente = new javax.swing.JMenuItem();
+        menuItemRelatorioProdutos = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuItemRelatorioPedido = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        teste = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,8 +83,8 @@ public class MainMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +166,31 @@ public class MainMenu extends javax.swing.JFrame {
 
         menuBar.add(menuArquivo);
 
+        jMenu2.setText("Relatórios");
+
+        menuItemRelatorioCliente.setText("Clientes");
+        menuItemRelatorioCliente.setActionCommand("RELATORIO_CLIENTES");
+        jMenu2.add(menuItemRelatorioCliente);
+
+        menuItemRelatorioProdutos.setText("Produtos");
+        menuItemRelatorioProdutos.setActionCommand("RELATORIO_PRODUTOS");
+        jMenu2.add(menuItemRelatorioProdutos);
+
+        jMenu3.setText("Reimpressão");
+
+        menuItemRelatorioPedido.setText("Pedido");
+        menuItemRelatorioPedido.setActionCommand("RELATORIO_PEDIDOS");
+        jMenu3.add(menuItemRelatorioPedido);
+
+        jMenu2.add(jMenu3);
+
+        menuBar.add(jMenu2);
+
         jMenu1.setText("Pesquisar");
+
+        teste.setText("Teste");
+        jMenu1.add(teste);
+
         menuBar.add(jMenu1);
 
         menuSair.setText("Sair");
@@ -177,7 +207,7 @@ public class MainMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -223,9 +253,8 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(lblBtnCliente)
                     .addComponent(lblBtnProduto)
                     .addComponent(lblBtnPedido)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(lblBtnSair)))
+                    .addComponent(jLabel1)
+                    .addComponent(lblBtnSair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(81, 81, 81))
@@ -275,8 +304,23 @@ public class MainMenu extends javax.swing.JFrame {
     public JButton getBtnUltimosPedidos() {
         return btnUltimosPedidos;
     }
-        
+
+    public JMenuItem getTeste() {
+        return teste;
+    }
     
+    public JMenuItem getMenuItemRelatorioClientes(){
+        return menuItemRelatorioCliente;
+    }
+    
+     public JMenuItem getMenuItemRelatorioProdutos(){
+        return menuItemRelatorioProdutos;
+    }
+    
+     public JMenuItem getMenuItemRelatorioPedidos(){
+        return menuItemRelatorioPedido;
+    } 
+     
     public void centerScreen(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = this.getSize();
@@ -339,6 +383,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBtnCliente;
     private javax.swing.JLabel lblBtnPedido;
@@ -350,6 +396,10 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCliente;
     private javax.swing.JMenuItem menuItemPedido;
     private javax.swing.JMenuItem menuItemProduto;
+    private javax.swing.JMenuItem menuItemRelatorioCliente;
+    private javax.swing.JMenuItem menuItemRelatorioPedido;
+    private javax.swing.JMenuItem menuItemRelatorioProdutos;
     private javax.swing.JMenu menuSair;
+    private javax.swing.JMenuItem teste;
     // End of variables declaration//GEN-END:variables
 }

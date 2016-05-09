@@ -262,10 +262,7 @@ public class FormClienteListener implements InterfaceFormListeners,
             DialogListaCliente(form, true);
         dialogListaCliente.setLocationRelativeTo(form);
         dialogListaCliente.setVisible(true);
-        cliente = dialogListaCliente.getCliente();
-        
-        ClienteService clienteService = new ClienteService();
-        telefones = clienteService.findAllContacts(cliente);
+        cliente = dialogListaCliente.getCliente();                  
         
         fillData();
             
@@ -305,6 +302,8 @@ public class FormClienteListener implements InterfaceFormListeners,
             form.getTxtEndereco().setText(cliente.getEndereco());
             form.getTxtEMail().setText(cliente.getEmail());
             
+            ClienteService clienteService = new ClienteService();
+            telefones = clienteService.findAllContacts(cliente);     
             
             listModel = (DefaultListModel)form.getListaTelefones().getModel();
             

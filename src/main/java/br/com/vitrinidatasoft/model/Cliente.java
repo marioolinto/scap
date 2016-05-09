@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Cliente implements Serializable {
     private String endereco;
     
     @OneToMany(mappedBy="cliente", cascade=CascadeType.ALL, 
-               orphanRemoval=true)
+               orphanRemoval=true, fetch = FetchType.EAGER)
     private Set<Telefone> telefones;        
     
     public Cliente(){
@@ -94,8 +95,8 @@ public class Cliente implements Serializable {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
+    }        
+    
     @Override
     public String toString() {
         String cliente = "{ " +
@@ -104,7 +105,7 @@ public class Cliente implements Serializable {
                 "RG: " + rg + ", " +
                 "CPF: " + cpf + " }";                 
                 
-        return cliente; //To change body of generated methods, choose Tools | Templates.
+        return cliente; 
     }
     
     
