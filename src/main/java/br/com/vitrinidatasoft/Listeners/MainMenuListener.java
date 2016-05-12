@@ -153,17 +153,24 @@ public class MainMenuListener implements ActionListener {
         }
     }
 
+    @SuppressWarnings("null")
     private void showRelatorioPedidos() {
-         try{
-            RelatorioPedido relatorioPedido = new RelatorioPedido();
-            PedidoService pedidoService = new PedidoService();
-            String numero = JOptionPane.showInputDialog(
+        String numero = JOptionPane.showInputDialog(
                     mainMenu, "Qual o Pedido deseja reimprimir", 
-                    "número do pedido", JOptionPane.QUESTION_MESSAGE);            
-            List<Pedido> pedidos = pedidoService.findByNumero(numero);             
-            relatorioPedido.gerarRelatorio(pedidos);
-        }catch(JRException e){
-            JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());            
-        }                                                         
+                    "número do pedido", JOptionPane.QUESTION_MESSAGE);
+        if (numero != null && !numero.isEmpty()){
+            RelatorioPedido relatorioPedido = new RelatorioPedido();
+            PedidoService pedidoService = new PedidoService();                      
+            List<Pedido> pedidos = pedidoService.findByNumero(numero);    
+            try{
+                if (pedidos.size() > 0)
+                    relatorioPedido.gerarRelatorio(pedidos);
+                else 
+                    JOptionPane.showMessageDialog(mainMenu, 
+                            "Pedido não encontrado");
+            }catch(JRException e){
+                JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());            
+            }   
+        }                                                                 
     }
 }

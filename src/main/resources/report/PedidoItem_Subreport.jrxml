@@ -11,7 +11,7 @@
 		<initialValueExpression><![CDATA[0.0F]]></initialValueExpression>
 	</variable>
 	<variable name="total" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<variableExpression><![CDATA[$V{valorTotal}]]></variableExpression>
 		<initialValueExpression><![CDATA[0.0f]]></initialValueExpression>
 	</variable>
 	<background>
@@ -83,13 +83,6 @@
 	</detail>
 	<columnFooter>
 		<band height="33" splitType="Stretch">
-			<textField>
-				<reportElement x="470" y="9" width="71" height="20" uuid="5fa8da3b-8ab9-46cf-8f45-ce3572166552"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["R$ " + new DecimalFormat ("#,##0.00").format($V{total})]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="0" y="4" width="555" height="1" uuid="e6a53949-c991-4ea3-a20b-970bab67791e"/>
 			</line>
@@ -110,6 +103,13 @@
 				</textElement>
 				<text><![CDATA[PAGAMENTO NO ATO DA ENTREGA]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="470" y="9" width="71" height="20" uuid="583b3b7c-82ab-4fbc-8422-4f7aa154ca99"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R$ " + new DecimalFormat ("#,##0.00").format($V{total})]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
