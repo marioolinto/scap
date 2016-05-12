@@ -9,7 +9,7 @@
 	</background>
 	<detail>
 		<band height="21" splitType="Stretch">
-			<textField pattern="">
+			<textField pattern="" isBlankWhenNull="false">
 				<reportElement x="0" y="0" width="149" height="20" uuid="98397ba0-e7c2-4e97-8719-e1634a4c590e"/>
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>

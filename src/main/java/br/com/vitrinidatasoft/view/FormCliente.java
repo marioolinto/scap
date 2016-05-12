@@ -8,7 +8,6 @@ package br.com.vitrinidatasoft.view;
 import br.com.vitrinidatasoft.Listeners.FormClienteListener;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -418,7 +417,7 @@ public class FormCliente extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        instance = null;
+        instance = null;        
     }//GEN-LAST:event_formWindowClosing
 
     /**

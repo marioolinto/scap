@@ -97,13 +97,13 @@ public class PedidoDao implements InterfaceDao<Pedido, Long>{
         return itens;
     }
     
-    public Pedido findByNumero(String numero){
-        Pedido pedido;
-        String queryString = "Select pedido From Pedido pedido where " + 
+    public List<Pedido> findByNumero(String numero){
+        List<Pedido> pedidos;
+        String queryString = "From Pedido pedido where " + 
                 "pedido.numero = " + numero;
         Query query = currentManager.createQuery(queryString);
-        pedido = (Pedido)query.getSingleResult();       
-        return pedido;
+        pedidos = query.getResultList();       
+        return pedidos;
     }
     
     @Override

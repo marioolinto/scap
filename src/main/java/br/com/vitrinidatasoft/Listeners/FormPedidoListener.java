@@ -10,6 +10,7 @@ import br.com.vitrinidatasoft.model.Pedido;
 import br.com.vitrinidatasoft.model.PedidoItem;
 import br.com.vitrinidatasoft.model.PedidoItensTableModel;
 import br.com.vitrinidatasoft.model.Produto;
+import br.com.vitrinidatasoft.relatorios.RelatorioPedido;
 import br.com.vitrinidatasoft.service.PedidoService;
 import br.com.vitrinidatasoft.utils.Constantes;
 import br.com.vitrinidatasoft.view.DialogListaCliente;
@@ -27,7 +28,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 
 
@@ -229,6 +232,15 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
        pedido.setValor(valorTotal);
        pedidoService = new PedidoService();
        pedidoService.persist(pedido);
+       
+       try{
+            RelatorioPedido relatorioPedido = new RelatorioPedido();                                   
+            List<Pedido> pedidos = pedidoService.findByNumero(
+                    pedido.getNumero());             
+            relatorioPedido.gerarRelatorio(pedidos);
+        }catch(JRException e){
+            JOptionPane.showMessageDialog(formPedido, "Erro " + e.getMessage());            
+        }                  
        
        resetFields();
        turnButtonsOf();

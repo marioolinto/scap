@@ -11,6 +11,7 @@ import br.com.vitrinidatasoft.model.PedidoItem;
 import br.com.vitrinidatasoft.model.Produto;
 import br.com.vitrinidatasoft.model.Telefone;
 import br.com.vitrinidatasoft.relatorios.RelatorioClientes;
+import br.com.vitrinidatasoft.relatorios.RelatorioPedido;
 import br.com.vitrinidatasoft.relatorios.RelatorioProdutos;
 import br.com.vitrinidatasoft.service.ClienteService;
 import br.com.vitrinidatasoft.service.PedidoService;
@@ -22,7 +23,6 @@ import br.com.vitrinidatasoft.view.FormUltimosPedidos;
 import br.com.vitrinidatasoft.view.MainMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
@@ -60,8 +60,7 @@ public class MainMenuListener implements ActionListener {
         mainMenu.getMenuItemCliente().addActionListener(this);
         mainMenu.getMenuItemProduto().addActionListener(this);
         mainMenu.getMenuItemPedido().addActionListener(this);
-        mainMenu.getBtnUltimosPedidos().addActionListener(this);
-        mainMenu.getTeste().addActionListener(this);
+        mainMenu.getBtnUltimosPedidos().addActionListener(this);        
         mainMenu.getMenuItemRelatorioClientes().addActionListener(this);
         mainMenu.getMenuItemRelatorioProdutos().addActionListener(this);
         mainMenu.getMenuItemRelatorioPedidos().addActionListener(this);
@@ -69,7 +68,7 @@ public class MainMenuListener implements ActionListener {
     
     private void showFormCliente(){               
         if (FormCliente.getInstance() == null){
-            FormCliente.main(null);
+            FormCliente.main(null);            
         } else {
             System.out.println("Instancia Formulário de Clientes já aberto");            
         }   
@@ -138,15 +137,6 @@ public class MainMenuListener implements ActionListener {
             ClienteService clienteService = new ClienteService();            
             List<Cliente> clientes = clienteService.findAll();            
             relatorioClientes.gerarRelatorio(clientes);
-            
-            /*for (int i = 0 ; i < clientes.size(); i++ ){
-                
-                System.out.println("Cliente " + clientes.get(i).getNome() + "\n");
-                for (Telefone telefone : clientes.get(i).getTelefones()) {
-                    System.out.println("Telefone " + telefone.getNumero() + "\n");
-                }
-                
-            }*/
         }catch (JRException e){
             JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());            
         }
@@ -164,12 +154,16 @@ public class MainMenuListener implements ActionListener {
     }
 
     private void showRelatorioPedidos() {
-        PedidoService pedidoService = new PedidoService();
-        
-        Pedido pedido = pedidoService.findByNumero("49649");
-        System.out.println("Cliente " + pedido.getCliente().getNome() + "\n");
-        
-        
-                
+         try{
+            RelatorioPedido relatorioPedido = new RelatorioPedido();
+            PedidoService pedidoService = new PedidoService();
+            String numero = JOptionPane.showInputDialog(
+                    mainMenu, "Qual o Pedido deseja reimprimir", 
+                    "número do pedido", JOptionPane.QUESTION_MESSAGE);            
+            List<Pedido> pedidos = pedidoService.findByNumero(numero);             
+            relatorioPedido.gerarRelatorio(pedidos);
+        }catch(JRException e){
+            JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());            
+        }                                                         
     }
 }

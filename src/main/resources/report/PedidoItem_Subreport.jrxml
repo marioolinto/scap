@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PedidoItem_Subreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ca69c917-888a-4258-81a6-911a7caedd70">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="produto.descricao" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Float"/>
+	<variable name="valorTotal" class="java.lang.Float" resetType="None">
+		<variableExpression><![CDATA[$F{quantidade}*$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0F]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0f]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="2" width="71" height="20" uuid="3616c0d7-42ac-4d7b-aeed-b9c6a08a4d39"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="2" width="275" height="20" uuid="d4cedcb5-2219-4ffe-9a0d-405357e0b381"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="2" width="76" height="20" uuid="ddc71392-d751-4602-9f0c-6f45d1e6062f"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="2" width="71" height="20" uuid="7a674548-beff-4519-b1b0-694e83835083"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="4" width="71" height="20" uuid="073c603a-4134-48e1-a03e-d9a5e2850eb7"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat ("000").format($F{quantidade})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="4" width="275" height="20" uuid="13fc82d7-fc03-49e5-b7a2-696f60922004"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produto.descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="4" width="76" height="20" uuid="74c97c59-e4ad-40c0-823f-ea3795faa0fa"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R$ " + new DecimalFormat ("#,##0.00").format($F{valor})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="4" width="71" height="20" uuid="cf9f5d1f-3a78-4ec0-8534-f11089acf797"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R$ " + new DecimalFormat ("#,##0.00").format($V{valorTotal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="470" y="9" width="71" height="20" uuid="5fa8da3b-8ab9-46cf-8f45-ce3572166552"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R$ " + new DecimalFormat ("#,##0.00").format($V{total})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="4" width="555" height="1" uuid="e6a53949-c991-4ea3-a20b-970bab67791e"/>
+			</line>
+			<staticText>
+				<reportElement x="431" y="9" width="39" height="20" uuid="877a851f-8f06-44a0-aeb8-8d5fa36f55d0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="13" y="9" width="408" height="20" forecolor="#FFFFFF" backcolor="#0066FF" uuid="9fd0ce9e-d510-46e0-9f7a-3dbbe19e0b1b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="9" width="408" height="20" forecolor="#FFFFFF" uuid="06330f0a-695f-487b-8410-b3eb21003d41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGAMENTO NO ATO DA ENTREGA]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="6" width="528" height="59" uuid="c46d5eca-8b09-4e51-9504-6f62f156f696"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eu estou ciente do material recebido, e que qualquer dano ou extravio do material da empresa LIMA TENDAS, será cobrado o valor real de cada peça.
+OBS.: Ultrapassado o prazo da entrega pagarei outro aluguel.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

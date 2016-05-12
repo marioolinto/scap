@@ -60,8 +60,6 @@ public class MainMenu extends javax.swing.JFrame {
         menuItemRelatorioProdutos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuItemRelatorioPedido = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        teste = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,13 +184,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         menuBar.add(jMenu2);
 
-        jMenu1.setText("Pesquisar");
-
-        teste.setText("Teste");
-        jMenu1.add(teste);
-
-        menuBar.add(jMenu1);
-
         menuSair.setText("Sair");
         menuSair.setActionCommand("EXIT_SYSTEM");
         menuSair.setName("menuItemSair"); // NOI18N
@@ -304,10 +295,6 @@ public class MainMenu extends javax.swing.JFrame {
     public JButton getBtnUltimosPedidos() {
         return btnUltimosPedidos;
     }
-
-    public JMenuItem getTeste() {
-        return teste;
-    }
     
     public JMenuItem getMenuItemRelatorioClientes(){
         return menuItemRelatorioCliente;
@@ -347,7 +334,7 @@ public class MainMenu extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -382,7 +369,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnUltimosPedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
@@ -400,6 +386,5 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemRelatorioPedido;
     private javax.swing.JMenuItem menuItemRelatorioProdutos;
     private javax.swing.JMenu menuSair;
-    private javax.swing.JMenuItem teste;
     // End of variables declaration//GEN-END:variables
 }

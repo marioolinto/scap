@@ -43,10 +43,10 @@ public class PedidoService {
         return list;
     }
     
-    public Pedido findByNumero(String numero){
+    public List<Pedido> findByNumero(String numero){
         pedidoDao.openCurrentManager();
-        Pedido pedido = pedidoDao.findByNumero(numero);        
+        List<Pedido> pedidos = pedidoDao.findByNumero(numero);        
         pedidoDao.closeCurrentManager();
-        return pedido;
+        return pedidos;
     }
 }
