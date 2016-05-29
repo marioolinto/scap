@@ -10,22 +10,27 @@ import br.com.vitrinidatasoft.model.Pedido;
 import br.com.vitrinidatasoft.model.PedidoItem;
 import br.com.vitrinidatasoft.model.PedidoItensTableModel;
 import br.com.vitrinidatasoft.model.PedidoTableModel;
+import br.com.vitrinidatasoft.relatorios.RelatorioPedido;
 import br.com.vitrinidatasoft.service.PedidoService;
 import br.com.vitrinidatasoft.view.DialogListaCliente;
 import br.com.vitrinidatasoft.view.FormUltimosPedidos;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
  * @author mrhell
  */
 public class UltimosPedidosListener implements InterfaceFormListeners, 
-        ListSelectionListener{
+        ListSelectionListener, MouseListener{
     
     private final FormUltimosPedidos formUltimosPedidos;
     private PedidoTableModel pedidoTableModel;
@@ -45,51 +50,52 @@ public class UltimosPedidosListener implements InterfaceFormListeners,
         formUltimosPedidos.getBtnBuscarCliente().addActionListener(this);
         formUltimosPedidos.getTblPedidos().getSelectionModel().
                 addListSelectionListener(this);
+        formUltimosPedidos.getTblPedidos().addMouseListener(this);
     }
 
     @Override
     public void resetFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void turnButtonsOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void turnButtonsOf() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void disableEditTexts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void enableEditTexts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void actionPerformedNovo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void actionPerformedSalvar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void actionPerfomedEditar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void actionPerformedCancelar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -138,7 +144,7 @@ public class UltimosPedidosListener implements InterfaceFormListeners,
 
     private void loadItensPedido(Pedido pedido) {
         PedidoService pedidoService = new PedidoService();
-        List<PedidoItem> itens = pedidoService.findItensByPedido(pedido);
+        List<PedidoItem> itens = pedidoService.findItensByPedido(pedido);        
         itensTableModel = new PedidoItensTableModel(itens);
         formUltimosPedidos.getTblPedidoItens().setModel(itensTableModel);
         formUltimosPedidos.getTblPedidoItens().getColumnModel().getColumn(0).
@@ -155,5 +161,44 @@ public class UltimosPedidosListener implements InterfaceFormListeners,
                 setCellRenderer(renderer);
         formUltimosPedidos.getTblPedidoItens().getColumnModel().getColumn(2).
                 setPreferredWidth(25);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2){
+            RelatorioPedido relatorioPedido = new RelatorioPedido();
+            PedidoService pedidoService = new PedidoService();                      
+            List<Pedido> pedidos = pedidoService.findByNumero(pedido.getNumero());    
+            try{
+                if (pedidos.size() > 0)
+                    relatorioPedido.gerarRelatorio(pedidos);
+                else 
+                    JOptionPane.showMessageDialog(formUltimosPedidos, 
+                            "Pedido não encontrado");
+            }catch(JRException exception){
+                JOptionPane.showMessageDialog(formUltimosPedidos, 
+                        "Erro " + exception.getMessage());                 
+            }   
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+         //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+       //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+         //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+         //To change body of generated methods, choose Tools | Templates.
     }
 }

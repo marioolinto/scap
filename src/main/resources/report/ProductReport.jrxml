@@ -13,7 +13,7 @@
 		<band height="88" splitType="Stretch">
 			<image>
 				<reportElement x="14" y="4" width="104" height="80" uuid="dab42058-1558-4478-989b-755e7d50ad6c"/>
-				<imageExpression><![CDATA["D:\\Java\\scap_diego\\src\\main\\resources\\images\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Program Files\\scap\\images\\logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="74" y="4" width="481" height="80" uuid="973845ef-f538-4ea0-8e87-e6a3884855f2"/>
@@ -62,7 +62,7 @@
 			<textField>
 				<reportElement x="455" y="1" width="100" height="20" uuid="6fa2c9e6-a2e8-47d2-abbd-1db7e8b1fac8"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format($F{valor})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat ("#,##0.00").format($F{valor})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

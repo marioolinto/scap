@@ -113,10 +113,22 @@ public class ClienteDao implements InterfaceDao<Cliente, Long>{
                                      
         Query query = currentManager.createQuery(queryString);
         List<Cliente> clientes = query.getResultList();
-        return clientes;
-        
+        return clientes;        
     }
      
+    public List<Cliente> findByFilter(String filter){
+        String queryString = "FROM Cliente cliente  "
+                + "JOIN FETCH cliente.telefones telefones "
+                + "WHERE UPPER(cliente.nome) like :filter OR "
+                + "UPPER(cliente.email) like :filter OR "
+                + "telefones.numero like :filter";                                     
+        Query query = currentManager.createQuery(queryString);
+        String keyword = "%" + filter.toUpperCase() + "%"; 
+        query.setParameter("filter", keyword);
+        List<Cliente> clientes = query.getResultList();
+        return clientes; 
+    }
+    
     @Override
     public void delete(Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); 

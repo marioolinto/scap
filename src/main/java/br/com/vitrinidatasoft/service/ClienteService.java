@@ -56,4 +56,11 @@ public class ClienteService {
         return clientes;
     }
     
+    public List<Cliente> findByFilter(String filter){
+        clienteDao.openCurrentManager();
+        List<Cliente> clientes = clienteDao.findByFilter(filter);
+        clienteDao.closeCurrentManager();
+        return clientes;
+    }
+    
 }

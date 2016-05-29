@@ -14,10 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -58,6 +56,20 @@ public class ListaClienteListener implements ActionListener,
                 getColumn(2).setPreferredWidth(300);
     }
     
+     public void loadListaCliente(String filter){
+        clienteService = new ClienteService();
+        List<Cliente> clientes = clienteService.findByFilter(filter);
+        clienteTableModel = new ClienteTableModel(clientes);       
+        
+        dialogListaCliente.getTblCliente().setModel(clienteTableModel);
+        dialogListaCliente.getTblCliente().getColumnModel().
+                getColumn(0).setPreferredWidth(300);
+        dialogListaCliente.getTblCliente().getColumnModel().
+                getColumn(1).setPreferredWidth(100);           
+        dialogListaCliente.getTblCliente().getColumnModel().
+                getColumn(2).setPreferredWidth(300);
+    }
+    
     private void attachListener() {
         dialogListaCliente.getBtnFilter().addActionListener(this);
         dialogListaCliente.getTblCliente().getSelectionModel()
@@ -65,25 +77,14 @@ public class ListaClienteListener implements ActionListener,
         dialogListaCliente.getTblCliente().addMouseListener(this);
     }
 
-    private void actionPerformedFilter() {
-        Integer column = 0;
-        
-        if (dialogListaCliente.getRdbNome().isSelected())
-            column = 0;
-        else if(dialogListaCliente.getRdbTelefone().isSelected())             
-            column = 1;
-        else
-            column = 2;
-        
-        String search = dialogListaCliente.getTxtSearch().getText();                
-        filter(search, column);
-        
-        
+    private void actionPerformedFilter() {       
+        String search = dialogListaCliente.getTxtSearch().getText();
+        loadListaCliente(search);                
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-       int selectedRow = dialogListaCliente.getTblCliente().getSelectedRow();
+       int selectedRow = dialogListaCliente.getTblCliente().getSelectedRow();      
        cliente = clienteTableModel.getClientes().get(selectedRow);
        dialogListaCliente.setCliente(cliente);       
     }
@@ -115,13 +116,14 @@ public class ListaClienteListener implements ActionListener,
         //do nothing
     }
 
-    private void filter(String search, Integer column) {
+    //Método extinto deixado apenas para exemplo no códogo 
+    /*private void filter(String search, Integer column) {
         RowFilter filter = RowFilter.regexFilter(search, column);
         TableRowSorter<ClienteTableModel> sorter = 
                 new TableRowSorter(clienteTableModel);
         sorter.setRowFilter(filter);
         dialogListaCliente.getTblCliente().setRowSorter(sorter);
-    }
+    }*/
     
     
 }
