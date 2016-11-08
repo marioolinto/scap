@@ -74,6 +74,18 @@ public class ProdutoDao implements InterfaceDao<Produto, Long>{
         List<Produto> produtos = query.getResultList();        
         return produtos;
     }
+    
+    public List<Produto> findByFiter(String filter){
+        String queryString = "FROM Produto produto "
+                + "WHERE UPPER(produto.nome) like :filter OR "
+                + "UPPER(produto.descricao) like :filter ";
+        Query query = currentManager.createQuery(queryString);
+        String keyword = "%" + filter.toUpperCase() + "%"; 
+        query.setParameter("filter", keyword);
+        List<Produto> produtos = query.getResultList();
+        
+        return produtos;
+    }
 
     @Override
     public void delete(Produto entity) {

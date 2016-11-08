@@ -164,7 +164,7 @@ public class FormProdutoListener implements InterfaceFormListeners {
     public void actionPerformedNovo() {
         produto = new Produto();  
         turnButtonsOn();
-        //enableEditTexts();        
+        enableEditTexts();        
         form.getTxtNome().requestFocus();       
     }
 

@@ -39,5 +39,12 @@ public class ProdutoService {
         
         return list;
     }
+    
+    public List<Produto> findByFilter(String filter){
+        produtoDao.openCurrentManager();
+        List<Produto> produtos = produtoDao.findByFiter(filter);
+        produtoDao.closeCurrentManager();
+        return produtos;
+    }
             
 }

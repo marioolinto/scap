@@ -75,6 +75,7 @@ public class DialogListaProduto extends JDialog {
         setMinimumSize(new java.awt.Dimension(782, 491));
 
         txtProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtProduto.setName(""); // NOI18N
 
         btnProduto.setText("Filtrar");
         btnProduto.setActionCommand("FILTER");

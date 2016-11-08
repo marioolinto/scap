@@ -40,13 +40,16 @@ public class ListaProdutoListener implements ActionListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.getActionCommand().equals(FILTER)){            
+            actionPerformedFilter();
+        }
     }
 
     private void attachListner() {
         formListaProduto.getTblProduto().getSelectionModel().
                 addListSelectionListener(this);
         formListaProduto.getTblProduto().addMouseListener(this);
+        formListaProduto.getBtnProduto().addActionListener(this);
     }
     
     public void loadListaProduto(){
@@ -70,6 +73,34 @@ public class ListaProdutoListener implements ActionListener,
         formListaProduto.getTblProduto().getColumnModel()
                 .getColumn(3).setCellRenderer(renderer);
                 
+    }
+    
+    public void loadListaProduto(String filter){
+        produtoService = new ProdutoService();
+        List<Produto> produtos = produtoService.findByFilter(filter);
+        produtoTableModel = new ProdutoTableModel(produtos);
+        
+        formListaProduto.getTblProduto().setModel(produtoTableModel);
+        formListaProduto.getTblProduto().getColumnModel()
+                .getColumn(0).setPreferredWidth(10);
+        formListaProduto.getTblProduto().getColumnModel()
+                .getColumn(1).setPreferredWidth(150);
+        formListaProduto.getTblProduto().getColumnModel()
+                .getColumn(2).setPreferredWidth(300);
+        formListaProduto.getTblProduto().getColumnModel()
+                .getColumn(3).setPreferredWidth(20);
+        
+        DefaultTableCellRenderer renderer = 
+                new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        formListaProduto.getTblProduto().getColumnModel()
+                .getColumn(3).setCellRenderer(renderer);
+                
+    }
+    
+    private void actionPerformedFilter(){
+        String search = formListaProduto.getTxtProduto().getText();
+        loadListaProduto(search);                       
     }
 
     @Override
