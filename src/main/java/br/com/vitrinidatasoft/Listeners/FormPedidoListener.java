@@ -181,7 +181,6 @@ public class FormPedidoListener implements InterfaceFormListeners, FocusListener
         formPedido.getTxtObservacao().setEditable(true);
         formPedido.getTxtQuantidade().setEditable(true);
         formPedido.getTxtValor().setEditable(true);
-        formPedido.getTxtDesconto().setText("0,00");
 
     }
 

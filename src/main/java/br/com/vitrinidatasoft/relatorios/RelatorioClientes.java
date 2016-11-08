@@ -13,9 +13,9 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class RelatorioClientes {
     
-    public void gerarRelatorio(List<Cliente> clientes) throws JRException{          
+    public void gerarRelatorio(List<Cliente> clientes) throws JRException{
         InputStream fonte = this.getClass()
-                .getResourceAsStream("/report/ClientReport.jrxml");                 
+                .getResourceAsStream("/report/ClientReport.jrxml");   
         JasperReport report = JasperCompileManager.compileReport(fonte);
         JasperPrint print = JasperFillManager.fillReport(report, 
                 null, new JRBeanCollectionDataSource(clientes));

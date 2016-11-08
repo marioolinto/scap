@@ -7,7 +7,9 @@ package br.com.vitrinidatasoft.Listeners;
 
 import br.com.vitrinidatasoft.model.Cliente;
 import br.com.vitrinidatasoft.model.Pedido;
+import br.com.vitrinidatasoft.model.PedidoItem;
 import br.com.vitrinidatasoft.model.Produto;
+import br.com.vitrinidatasoft.model.Telefone;
 import br.com.vitrinidatasoft.relatorios.RelatorioClientes;
 import br.com.vitrinidatasoft.relatorios.RelatorioPedido;
 import br.com.vitrinidatasoft.relatorios.RelatorioProdutos;
@@ -167,7 +169,7 @@ public class MainMenuListener implements ActionListener {
                     JOptionPane.showMessageDialog(mainMenu, 
                             "Pedido não encontrado");
             }catch(JRException e){
-                JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());                 
+                JOptionPane.showMessageDialog(mainMenu, "Erro " + e.getMessage());            
             }   
         }                                                                 
     }
